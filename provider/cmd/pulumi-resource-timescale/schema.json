@@ -1,0 +1,667 @@
+{
+    "name": "timescale",
+    "description": "A Pulumi package for creating and managing timescale cloud resources.",
+    "keywords": [
+        "pulumi",
+        "timescale",
+        "category/cloud"
+    ],
+    "homepage": "https://www.pulumi.com",
+    "license": "Apache-2.0",
+    "attribution": "This Pulumi package is based on the [`timescale` Terraform Provider](https://github.com/timescale/terraform-provider-timescale).",
+    "repository": "https://github.com/zlepper/pulumi-timescale",
+    "publisher": "Pulumi",
+    "meta": {
+        "moduleFormat": "(.*)(?:/[^/]*)"
+    },
+    "language": {
+        "csharp": {
+            "packageReferences": {
+                "Pulumi": "3.*"
+            },
+            "compatibility": "tfbridge20"
+        },
+        "go": {
+            "importBasePath": "github.com/zlepper/pulumi-timescale/sdk/go/timescale",
+            "generateResourceContainerTypes": true,
+            "generateExtraInputTypes": true
+        },
+        "nodejs": {
+            "packageDescription": "A Pulumi package for creating and managing timescale cloud resources.",
+            "readme": "\u003e This provider is a derived work of the [Terraform Provider](https://github.com/timescale/terraform-provider-timescale)\n\u003e distributed under [MPL 2.0](https://www.mozilla.org/en-US/MPL/2.0/). If you encounter a bug or missing feature,\n\u003e first check the [`pulumi-timescale` repo](https://github.com/zlepper/pulumi-timescale/issues); however, if that doesn't turn up anything,\n\u003e please consult the source [`terraform-provider-timescale` repo](https://github.com/timescale/terraform-provider-timescale/issues).",
+            "dependencies": {
+                "@pulumi/pulumi": "^3.0.0"
+            },
+            "devDependencies": {
+                "@types/mime": "^2.0.0",
+                "@types/node": "^10.0.0"
+            },
+            "compatibility": "tfbridge20",
+            "disableUnionOutputTypes": true
+        },
+        "python": {
+            "requires": {
+                "pulumi": "\u003e=3.0.0,\u003c4.0.0"
+            },
+            "readme": "\u003e This provider is a derived work of the [Terraform Provider](https://github.com/timescale/terraform-provider-timescale)\n\u003e distributed under [MPL 2.0](https://www.mozilla.org/en-US/MPL/2.0/). If you encounter a bug or missing feature,\n\u003e first check the [`pulumi-timescale` repo](https://github.com/zlepper/pulumi-timescale/issues); however, if that doesn't turn up anything,\n\u003e please consult the source [`terraform-provider-timescale` repo](https://github.com/timescale/terraform-provider-timescale/issues).",
+            "compatibility": "tfbridge20",
+            "pyproject": {}
+        }
+    },
+    "config": {
+        "variables": {
+            "accessKey": {
+                "type": "string",
+                "description": "Access Key\n"
+            },
+            "accessToken": {
+                "type": "string",
+                "description": "Access Token\n",
+                "secret": true
+            },
+            "projectId": {
+                "type": "string",
+                "description": "Project ID\n"
+            },
+            "secretKey": {
+                "type": "string",
+                "description": "Secret Key\n",
+                "secret": true
+            }
+        },
+        "defaults": [
+            "projectId"
+        ]
+    },
+    "types": {
+        "timescale:index/ServiceTimeouts:ServiceTimeouts": {
+            "properties": {
+                "create": {
+                    "type": "string",
+                    "description": "A string that can be [parsed as a duration](https://pkg.go.dev/time#ParseDuration) consisting of numbers and unit suffixes, such as \"30s\" or \"2h45m\". Valid time units are \"s\" (seconds), \"m\" (minutes), \"h\" (hours).\n"
+                }
+            },
+            "type": "object"
+        },
+        "timescale:index/getProductsProduct:getProductsProduct": {
+            "properties": {
+                "description": {
+                    "type": "string"
+                },
+                "id": {
+                    "type": "string",
+                    "description": "The ID of this resource.\n"
+                },
+                "name": {
+                    "type": "string"
+                },
+                "plans": {
+                    "type": "array",
+                    "items": {
+                        "$ref": "#/types/timescale:index/getProductsProductPlan:getProductsProductPlan"
+                    }
+                }
+            },
+            "type": "object",
+            "required": [
+                "description",
+                "id",
+                "name",
+                "plans"
+            ],
+            "language": {
+                "nodejs": {
+                    "requiredInputs": []
+                }
+            }
+        },
+        "timescale:index/getProductsProductPlan:getProductsProductPlan": {
+            "properties": {
+                "id": {
+                    "type": "string",
+                    "description": "The ID of this resource.\n"
+                },
+                "memoryGb": {
+                    "type": "integer"
+                },
+                "milliCpu": {
+                    "type": "integer"
+                },
+                "price": {
+                    "type": "number"
+                },
+                "productId": {
+                    "type": "string"
+                },
+                "regionCode": {
+                    "type": "string"
+                }
+            },
+            "type": "object",
+            "required": [
+                "id",
+                "memoryGb",
+                "milliCpu",
+                "price",
+                "productId",
+                "regionCode"
+            ],
+            "language": {
+                "nodejs": {
+                    "requiredInputs": []
+                }
+            }
+        },
+        "timescale:index/getServiceResource:getServiceResource": {
+            "properties": {
+                "id": {
+                    "type": "string",
+                    "description": "Service ID is the unique identifier for this service\n"
+                },
+                "spec": {
+                    "$ref": "#/types/timescale:index/getServiceResourceSpec:getServiceResourceSpec"
+                }
+            },
+            "type": "object",
+            "required": [
+                "id",
+                "spec"
+            ],
+            "language": {
+                "nodejs": {
+                    "requiredInputs": []
+                }
+            }
+        },
+        "timescale:index/getServiceResourceSpec:getServiceResourceSpec": {
+            "properties": {
+                "enableHaReplica": {
+                    "type": "boolean"
+                },
+                "memoryGb": {
+                    "type": "integer"
+                },
+                "milliCpu": {
+                    "type": "integer"
+                }
+            },
+            "type": "object",
+            "required": [
+                "enableHaReplica",
+                "memoryGb",
+                "milliCpu"
+            ],
+            "language": {
+                "nodejs": {
+                    "requiredInputs": []
+                }
+            }
+        },
+        "timescale:index/getServiceSpec:getServiceSpec": {
+            "properties": {
+                "hostname": {
+                    "type": "string",
+                    "description": "Hostname is the hostname of this service.\n"
+                },
+                "port": {
+                    "type": "integer",
+                    "description": "Port is the port assigned to this service.\n"
+                },
+                "username": {
+                    "type": "string",
+                    "description": "Username is the Postgres username.\n"
+                }
+            },
+            "type": "object",
+            "required": [
+                "hostname",
+                "port",
+                "username"
+            ],
+            "language": {
+                "nodejs": {
+                    "requiredInputs": []
+                }
+            }
+        },
+        "timescale:index/getVpcsVpc:getVpcsVpc": {
+            "properties": {
+                "cidr": {
+                    "type": "string"
+                },
+                "created": {
+                    "type": "string"
+                },
+                "errorMessage": {
+                    "type": "string"
+                },
+                "id": {
+                    "type": "integer",
+                    "description": "The ID of this resource.\n"
+                },
+                "name": {
+                    "type": "string"
+                },
+                "peeringConnections": {
+                    "type": "array",
+                    "items": {
+                        "$ref": "#/types/timescale:index/getVpcsVpcPeeringConnection:getVpcsVpcPeeringConnection"
+                    }
+                },
+                "projectId": {
+                    "type": "string"
+                },
+                "provisionedId": {
+                    "type": "string"
+                },
+                "regionCode": {
+                    "type": "string"
+                },
+                "status": {
+                    "type": "string"
+                },
+                "updated": {
+                    "type": "string"
+                }
+            },
+            "type": "object",
+            "required": [
+                "cidr",
+                "created",
+                "errorMessage",
+                "id",
+                "name",
+                "peeringConnections",
+                "projectId",
+                "provisionedId",
+                "regionCode",
+                "status",
+                "updated"
+            ],
+            "language": {
+                "nodejs": {
+                    "requiredInputs": []
+                }
+            }
+        },
+        "timescale:index/getVpcsVpcPeeringConnection:getVpcsVpcPeeringConnection": {
+            "properties": {
+                "errorMessage": {
+                    "type": "string"
+                },
+                "id": {
+                    "type": "integer",
+                    "description": "The ID of this resource.\n"
+                },
+                "peerVpcs": {
+                    "type": "array",
+                    "items": {
+                        "$ref": "#/types/timescale:index/getVpcsVpcPeeringConnectionPeerVpc:getVpcsVpcPeeringConnectionPeerVpc"
+                    }
+                },
+                "status": {
+                    "type": "string"
+                },
+                "vpcId": {
+                    "type": "integer"
+                }
+            },
+            "type": "object",
+            "required": [
+                "errorMessage",
+                "id",
+                "peerVpcs",
+                "status",
+                "vpcId"
+            ],
+            "language": {
+                "nodejs": {
+                    "requiredInputs": []
+                }
+            }
+        },
+        "timescale:index/getVpcsVpcPeeringConnectionPeerVpc:getVpcsVpcPeeringConnectionPeerVpc": {
+            "properties": {
+                "accountId": {
+                    "type": "string"
+                },
+                "cidr": {
+                    "type": "string"
+                },
+                "id": {
+                    "type": "integer",
+                    "description": "The ID of this resource.\n"
+                },
+                "regionCode": {
+                    "type": "string"
+                }
+            },
+            "type": "object",
+            "required": [
+                "accountId",
+                "cidr",
+                "id",
+                "regionCode"
+            ],
+            "language": {
+                "nodejs": {
+                    "requiredInputs": []
+                }
+            }
+        }
+    },
+    "provider": {
+        "description": "The provider type for the timescale package. By default, resources use package-wide configuration\nsettings, however an explicit `Provider` instance may be created and passed during resource\nconstruction to achieve fine-grained programmatic control over provider settings. See the\n[documentation](https://www.pulumi.com/docs/reference/programming-model/#providers) for more information.\n",
+        "properties": {
+            "accessKey": {
+                "type": "string",
+                "description": "Access Key\n"
+            },
+            "accessToken": {
+                "type": "string",
+                "description": "Access Token\n",
+                "secret": true
+            },
+            "projectId": {
+                "type": "string",
+                "description": "Project ID\n"
+            },
+            "secretKey": {
+                "type": "string",
+                "description": "Secret Key\n",
+                "secret": true
+            }
+        },
+        "required": [
+            "projectId"
+        ],
+        "inputProperties": {
+            "accessKey": {
+                "type": "string",
+                "description": "Access Key\n"
+            },
+            "accessToken": {
+                "type": "string",
+                "description": "Access Token\n",
+                "secret": true
+            },
+            "projectId": {
+                "type": "string",
+                "description": "Project ID\n"
+            },
+            "secretKey": {
+                "type": "string",
+                "description": "Secret Key\n",
+                "secret": true
+            }
+        },
+        "requiredInputs": [
+            "projectId"
+        ]
+    },
+    "resources": {
+        "timescale:index/service:Service": {
+            "properties": {
+                "enableHaReplica": {
+                    "type": "boolean",
+                    "description": "Enable HA Replica\n"
+                },
+                "hostname": {
+                    "type": "string",
+                    "description": "The hostname for this service\n"
+                },
+                "memoryGb": {
+                    "type": "integer",
+                    "description": "Memory GB\n"
+                },
+                "milliCpu": {
+                    "type": "integer",
+                    "description": "Milli CPU\n"
+                },
+                "name": {
+                    "type": "string",
+                    "description": "Service Name is the configurable name assigned to this resource. If none is provided, a default will be generated by the provider.\n"
+                },
+                "password": {
+                    "type": "string",
+                    "description": "The Postgres password for this service. The password is provided once during service creation\n",
+                    "secret": true
+                },
+                "port": {
+                    "type": "integer",
+                    "description": "The port for this service\n"
+                },
+                "regionCode": {
+                    "type": "string",
+                    "description": "The region for this service. Currently supported regions are us-east-1, eu-west-1, us-west-2, eu-central-1, ap-southeast-2\n"
+                },
+                "storageGb": {
+                    "type": "integer",
+                    "description": "Deprecated: Storage GB\n",
+                    "deprecationMessage": "This field is ignored. With the new usage-based storage Timescale automatically allocates the disk space needed by your service and you only pay for the disk space you use."
+                },
+                "timeouts": {
+                    "$ref": "#/types/timescale:index/ServiceTimeouts:ServiceTimeouts"
+                },
+                "username": {
+                    "type": "string",
+                    "description": "The Postgres user for this service\n"
+                },
+                "vpcId": {
+                    "type": "integer",
+                    "description": "The VpcID this service is tied to.\n"
+                }
+            },
+            "required": [
+                "enableHaReplica",
+                "hostname",
+                "memoryGb",
+                "milliCpu",
+                "name",
+                "password",
+                "port",
+                "regionCode",
+                "username"
+            ],
+            "inputProperties": {
+                "enableHaReplica": {
+                    "type": "boolean",
+                    "description": "Enable HA Replica\n"
+                },
+                "memoryGb": {
+                    "type": "integer",
+                    "description": "Memory GB\n"
+                },
+                "milliCpu": {
+                    "type": "integer",
+                    "description": "Milli CPU\n"
+                },
+                "name": {
+                    "type": "string",
+                    "description": "Service Name is the configurable name assigned to this resource. If none is provided, a default will be generated by the provider.\n"
+                },
+                "regionCode": {
+                    "type": "string",
+                    "description": "The region for this service. Currently supported regions are us-east-1, eu-west-1, us-west-2, eu-central-1, ap-southeast-2\n"
+                },
+                "storageGb": {
+                    "type": "integer",
+                    "description": "Deprecated: Storage GB\n",
+                    "deprecationMessage": "This field is ignored. With the new usage-based storage Timescale automatically allocates the disk space needed by your service and you only pay for the disk space you use."
+                },
+                "timeouts": {
+                    "$ref": "#/types/timescale:index/ServiceTimeouts:ServiceTimeouts"
+                },
+                "vpcId": {
+                    "type": "integer",
+                    "description": "The VpcID this service is tied to.\n"
+                }
+            },
+            "stateInputs": {
+                "description": "Input properties used for looking up and filtering Service resources.\n",
+                "properties": {
+                    "enableHaReplica": {
+                        "type": "boolean",
+                        "description": "Enable HA Replica\n"
+                    },
+                    "hostname": {
+                        "type": "string",
+                        "description": "The hostname for this service\n"
+                    },
+                    "memoryGb": {
+                        "type": "integer",
+                        "description": "Memory GB\n"
+                    },
+                    "milliCpu": {
+                        "type": "integer",
+                        "description": "Milli CPU\n"
+                    },
+                    "name": {
+                        "type": "string",
+                        "description": "Service Name is the configurable name assigned to this resource. If none is provided, a default will be generated by the provider.\n"
+                    },
+                    "password": {
+                        "type": "string",
+                        "description": "The Postgres password for this service. The password is provided once during service creation\n",
+                        "secret": true
+                    },
+                    "port": {
+                        "type": "integer",
+                        "description": "The port for this service\n"
+                    },
+                    "regionCode": {
+                        "type": "string",
+                        "description": "The region for this service. Currently supported regions are us-east-1, eu-west-1, us-west-2, eu-central-1, ap-southeast-2\n"
+                    },
+                    "storageGb": {
+                        "type": "integer",
+                        "description": "Deprecated: Storage GB\n",
+                        "deprecationMessage": "This field is ignored. With the new usage-based storage Timescale automatically allocates the disk space needed by your service and you only pay for the disk space you use."
+                    },
+                    "timeouts": {
+                        "$ref": "#/types/timescale:index/ServiceTimeouts:ServiceTimeouts"
+                    },
+                    "username": {
+                        "type": "string",
+                        "description": "The Postgres user for this service\n"
+                    },
+                    "vpcId": {
+                        "type": "integer",
+                        "description": "The VpcID this service is tied to.\n"
+                    }
+                },
+                "type": "object"
+            }
+        }
+    },
+    "functions": {
+        "timescale:index/getProducts:getProducts": {
+            "outputs": {
+                "description": "A collection of values returned by getProducts.\n",
+                "properties": {
+                    "id": {
+                        "type": "string",
+                        "description": "The ID of this resource.\n"
+                    },
+                    "products": {
+                        "type": "array",
+                        "items": {
+                            "$ref": "#/types/timescale:index/getProductsProduct:getProductsProduct"
+                        }
+                    }
+                },
+                "type": "object",
+                "required": [
+                    "id",
+                    "products"
+                ]
+            }
+        },
+        "timescale:index/getService:getService": {
+            "description": "Service data source\n",
+            "inputs": {
+                "description": "A collection of arguments for invoking getService.\n",
+                "properties": {
+                    "id": {
+                        "type": "string",
+                        "description": "Service ID is the unique identifier for this service\n"
+                    },
+                    "vpcId": {
+                        "type": "integer",
+                        "description": "VPC ID this service is linked to.\n"
+                    }
+                },
+                "type": "object",
+                "required": [
+                    "id"
+                ]
+            },
+            "outputs": {
+                "description": "A collection of values returned by getService.\n",
+                "properties": {
+                    "created": {
+                        "type": "string",
+                        "description": "Created is the time this service was created.\n"
+                    },
+                    "id": {
+                        "type": "string",
+                        "description": "Service ID is the unique identifier for this service\n"
+                    },
+                    "name": {
+                        "type": "string",
+                        "description": "Service Name is the configurable name assigned to this resource. If none is provided, a default will be generated by the provider.\n"
+                    },
+                    "regionCode": {
+                        "type": "string",
+                        "description": "Region Code is the physical data center where this service is located.\n"
+                    },
+                    "resources": {
+                        "type": "array",
+                        "items": {
+                            "$ref": "#/types/timescale:index/getServiceResource:getServiceResource"
+                        }
+                    },
+                    "spec": {
+                        "$ref": "#/types/timescale:index/getServiceSpec:getServiceSpec"
+                    },
+                    "vpcId": {
+                        "type": "integer",
+                        "description": "VPC ID this service is linked to.\n"
+                    }
+                },
+                "type": "object",
+                "required": [
+                    "created",
+                    "id",
+                    "name",
+                    "regionCode",
+                    "resources",
+                    "spec",
+                    "vpcId"
+                ]
+            }
+        },
+        "timescale:index/getVpcs:getVpcs": {
+            "outputs": {
+                "description": "A collection of values returned by getVpcs.\n",
+                "properties": {
+                    "id": {
+                        "type": "string",
+                        "description": "The ID of this resource.\n"
+                    },
+                    "vpcs": {
+                        "type": "array",
+                        "items": {
+                            "$ref": "#/types/timescale:index/getVpcsVpc:getVpcsVpc"
+                        }
+                    }
+                },
+                "type": "object",
+                "required": [
+                    "id",
+                    "vpcs"
+                ]
+            }
+        }
+    }
+}

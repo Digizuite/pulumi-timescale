@@ -1,0 +1,125 @@
+{
+    "auto-aliasing": {
+        "resources": {
+            "timescale_service": {
+                "current": "timescale:index/service:Service"
+            }
+        },
+        "datasources": {
+            "timescale_products": {
+                "current": "timescale:index/getProducts:getProducts",
+                "fields": {
+                    "products": {
+                        "maxItemsOne": false,
+                        "elem": {
+                            "elem": {
+                                "fields": {
+                                    "plans": {
+                                        "maxItemsOne": false
+                                    }
+                                }
+                            }
+                        }
+                    }
+                }
+            },
+            "timescale_service": {
+                "current": "timescale:index/getService:getService",
+                "fields": {
+                    "resources": {
+                        "maxItemsOne": false
+                    }
+                }
+            },
+            "timescale_vpcs": {
+                "current": "timescale:index/getVpcs:getVpcs",
+                "fields": {
+                    "vpcs": {
+                        "maxItemsOne": false,
+                        "elem": {
+                            "elem": {
+                                "fields": {
+                                    "peering_connections": {
+                                        "maxItemsOne": false,
+                                        "elem": {
+                                            "elem": {
+                                                "fields": {
+                                                    "peer_vpc": {
+                                                        "maxItemsOne": false
+                                                    }
+                                                }
+                                            }
+                                        }
+                                    }
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        }
+    },
+    "renames": {
+        "resources": {
+            "timescale:index/service:Service": "timescale_service"
+        },
+        "functions": {
+            "timescale:index/getProducts:getProducts": "timescale_products",
+            "timescale:index/getService:getService": "timescale_service",
+            "timescale:index/getVpcs:getVpcs": "timescale_vpcs"
+        },
+        "renamedProperties": {
+            "timescale:index/getProductsProductPlan:getProductsProductPlan": {
+                "memoryGb": "memory_gb",
+                "milliCpu": "milli_cpu",
+                "productId": "product_id",
+                "regionCode": "region_code"
+            },
+            "timescale:index/getService:getService": {
+                "regionCode": "region_code",
+                "vpcId": "vpc_id"
+            },
+            "timescale:index/getServiceResourceSpec:getServiceResourceSpec": {
+                "enableHaReplica": "enable_ha_replica",
+                "memoryGb": "memory_gb",
+                "milliCpu": "milli_cpu"
+            },
+            "timescale:index/getVpcsVpc:getVpcsVpc": {
+                "errorMessage": "error_message",
+                "peeringConnections": "peering_connections",
+                "projectId": "project_id",
+                "provisionedId": "provisioned_id",
+                "regionCode": "region_code"
+            },
+            "timescale:index/getVpcsVpcPeeringConnection:getVpcsVpcPeeringConnection": {
+                "errorMessage": "error_message",
+                "peerVpcs": "peer_vpc",
+                "vpcId": "vpc_id"
+            },
+            "timescale:index/getVpcsVpcPeeringConnectionPeerVpc:getVpcsVpcPeeringConnectionPeerVpc": {
+                "accountId": "account_id",
+                "regionCode": "region_code"
+            },
+            "timescale:index/service:Service": {
+                "enableHaReplica": "enable_ha_replica",
+                "memoryGb": "memory_gb",
+                "milliCpu": "milli_cpu",
+                "regionCode": "region_code",
+                "storageGb": "storage_gb",
+                "vpcId": "vpc_id"
+            },
+            "timescale:index:Provider": {
+                "accessKey": "access_key",
+                "accessToken": "access_token",
+                "projectId": "project_id",
+                "secretKey": "secret_key"
+            }
+        },
+        "renamedConfigProperties": {
+            "accessKey": "access_key",
+            "accessToken": "access_token",
+            "projectId": "project_id",
+            "secretKey": "secret_key"
+        }
+    }
+}
