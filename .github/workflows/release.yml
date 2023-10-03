@@ -225,6 +225,8 @@ jobs:
     steps:
       - name: Publish SDKs
         uses: pulumi/pulumi-package-publisher@v0.0.11
+        with:
+          sdk: dotnet
   tag_sdk:
     name: tag_sdk
     needs: publish_sdk
