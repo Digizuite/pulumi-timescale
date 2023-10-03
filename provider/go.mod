@@ -1,4 +1,4 @@
-module github.com/zlepper/pulumi-timescale/provider
+module github.com/digizuite/pulumi-timescale/provider
 
 go 1.18
 

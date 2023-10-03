@@ -2,9 +2,9 @@ PROJECT_NAME := timescale Package
 
 SHELL            := /bin/bash
 PACK             := timescale
-ORG              := zlepper
+ORG              := digizuite
 PROJECT          := github.com/${ORG}/pulumi-${PACK}
-NODE_MODULE_NAME := @zlepper/${PACK}
+NODE_MODULE_NAME := @digizuite/${PACK}
 TF_NAME          := ${PACK}
 PROVIDER_PATH    := provider
 VERSION_PATH     := ${PROVIDER_PATH}/pkg/version.Version
@@ -29,13 +29,13 @@ prepare::
 	mv "provider/cmd/pulumi-resource-x${EMPTY_TO_AVOID_SED}yz" provider/cmd/pulumi-resource-${NAME}
 
 	if [[ "${OS}" != "Darwin" ]]; then \
-		sed -i 's,github.com/zlepper/pulumi-timescale,${REPOSITORY},g' provider/go.mod; \
+		sed -i 's,github.com/digizuite/pulumi-timescale,${REPOSITORY},g' provider/go.mod; \
 		find ./ ! -path './.git/*' -type f -exec sed -i 's/[x]yz/${NAME}/g' {} \; &> /dev/null; \
 	fi
 
 	# In MacOS the -i parameter needs an empty string to execute in place.
 	if [[ "${OS}" == "Darwin" ]]; then \
-		sed -i '' 's,github.com/zlepper/pulumi-timescale,${REPOSITORY},g' provider/go.mod; \
+		sed -i '' 's,github.com/digizuite/pulumi-timescale,${REPOSITORY},g' provider/go.mod; \
 		find ./ ! -path './.git/*' -type f -exec sed -i '' 's/[x]yz/${NAME}/g' {} \; &> /dev/null; \
 	fi
 

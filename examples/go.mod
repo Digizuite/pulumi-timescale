@@ -1,3 +1,3 @@
-module github.com/zlepper/pulumi-timescale/examples
+module github.com/digizuite/pulumi-timescale/examples
 
 go 1.16

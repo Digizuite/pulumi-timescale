@@ -24,4 +24,6 @@
 
 # Upgrade
 
-Pulumi provides a [GitHub action](https://github.com/pulumi/pulumi-upgrade-provider-action) to automate upgrading your provider upon a new upstream version release. An example workflow that runs the upgrade action on a cron job, as well as whenever an issue is created with a title prefix of 'Upgrade terraform-provider', is [provided here](./upgrade-provider.yml).
+Pulumi provides a [GitHub action](https://github.com/pulumi/pulumi-upgrade-provider-action) to automate upgrading your provider upon a new upstream version release.
+An example workflow that runs the upgrade action on a cron job, as well as whenever an issue is created with a title prefix of 
+'Upgrade terraform-provider', is [provided here](./upgrade-provider.yml).

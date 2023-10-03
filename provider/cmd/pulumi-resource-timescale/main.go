@@ -20,8 +20,8 @@ import (
 	"context"
 	_ "embed"
 
+	timescale "github.com/digizuite/pulumi-timescale/provider"
 	"github.com/pulumi/pulumi-terraform-bridge/pf/tfbridge"
-	timescale "github.com/zlepper/pulumi-timescale/provider"
 )
 
 //go:embed schema-embed.json

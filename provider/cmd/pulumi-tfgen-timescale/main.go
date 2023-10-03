@@ -15,9 +15,9 @@
 package main
 
 import (
+	timescale "github.com/digizuite/pulumi-timescale/provider"
+	"github.com/digizuite/pulumi-timescale/provider/pkg/version"
 	"github.com/pulumi/pulumi-terraform-bridge/v3/pkg/tfgen"
-	timescale "github.com/zlepper/pulumi-timescale/provider"
-	"github.com/zlepper/pulumi-timescale/provider/pkg/version"
 )
 
 func main() {

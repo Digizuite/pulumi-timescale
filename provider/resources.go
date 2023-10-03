@@ -20,13 +20,13 @@ import (
 	"fmt"
 	"path/filepath"
 
+	"github.com/digizuite/pulumi-timescale/provider/pkg/version"
 	pf "github.com/pulumi/pulumi-terraform-bridge/pf/tfbridge"
 	"github.com/pulumi/pulumi-terraform-bridge/v3/pkg/tfbridge"
 	"github.com/pulumi/pulumi-terraform-bridge/v3/pkg/tfbridge/tokens"
 	shim "github.com/pulumi/pulumi-terraform-bridge/v3/pkg/tfshim"
 	"github.com/pulumi/pulumi/sdk/v3/go/common/resource"
 	timescale "github.com/timescale/terraform-provider-timescale/shim"
-	"github.com/zlepper/pulumi-timescale/provider/pkg/version"
 )
 
 // all of the token components used below.
@@ -83,7 +83,7 @@ func Provider() tfbridge.ProviderInfo {
 		Keywords:   []string{"pulumi", "timescale", "category/cloud"},
 		License:    "Apache-2.0",
 		Homepage:   "https://www.pulumi.com",
-		Repository: "https://github.com/zlepper/pulumi-timescale",
+		Repository: "https://github.com/digizuite/pulumi-timescale",
 		// The GitHub Org for the provider - defaults to `terraform-providers`. Note that this
 		// should match the TF provider module's require directive, not any replace directives.
 		GitHubOrg: "timescale",
@@ -140,7 +140,7 @@ func Provider() tfbridge.ProviderInfo {
 		},
 		Golang: &tfbridge.GolangInfo{
 			ImportBasePath: filepath.Join(
-				fmt.Sprintf("github.com/zlepper/pulumi-%[1]s/sdk/", mainPkg),
+				fmt.Sprintf("github.com/digizuite/pulumi-%[1]s/sdk/", mainPkg),
 				tfbridge.GetModuleMajorVersion(version.Version),
 				"go",
 				mainPkg,

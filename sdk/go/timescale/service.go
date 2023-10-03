@@ -7,9 +7,9 @@ import (
 	"context"
 	"reflect"
 
+	"github.com/digizuite/pulumi-timescale/sdk/go/timescale/internal"
 	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
 	"github.com/pulumi/pulumi/sdk/v3/go/pulumix"
-	"github.com/zlepper/pulumi-timescale/sdk/go/timescale/internal"
 )
 
 type Service struct {

@@ -7,8 +7,8 @@ import (
 	"fmt"
 
 	"github.com/blang/semver"
+	"github.com/digizuite/pulumi-timescale/sdk/go/timescale/internal"
 	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
-	"github.com/zlepper/pulumi-timescale/sdk/go/timescale/internal"
 )
 
 type module struct {

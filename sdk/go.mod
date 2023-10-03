@@ -1,4 +1,4 @@
-module github.com/zlepper/pulumi-timescale/sdk
+module github.com/digizuite/pulumi-timescale/sdk
 
 go 1.17
 

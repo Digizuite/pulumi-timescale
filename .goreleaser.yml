@@ -18,7 +18,7 @@ builds:
       - linux
     ldflags:
       # The line below MUST align with the module in current provider/go.mod
-      - -X github.com/your-org-name/pulumi-timescale/provider/pkg/version.Version={{.Tag }}
+      - -X github.com/digizuite/pulumi-timescale/provider/pkg/version.Version={{.Tag }}
     main: ./cmd/pulumi-resource-timescale/
 changelog:
   skip: true

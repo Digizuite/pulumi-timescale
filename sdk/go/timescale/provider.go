@@ -8,9 +8,9 @@ import (
 	"reflect"
 
 	"errors"
+	"github.com/digizuite/pulumi-timescale/sdk/go/timescale/internal"
 	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
 	"github.com/pulumi/pulumi/sdk/v3/go/pulumix"
-	"github.com/zlepper/pulumi-timescale/sdk/go/timescale/internal"
 )
 
 // The provider type for the timescale package. By default, resources use package-wide configuration

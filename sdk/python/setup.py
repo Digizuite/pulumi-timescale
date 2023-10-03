@@ -26,7 +26,7 @@ setup(name='pulumi_timescale',
       keywords='pulumi timescale category/cloud',
       url='https://www.pulumi.com',
       project_urls={
-          'Repository': 'https://github.com/zlepper/pulumi-timescale'
+          'Repository': 'https://github.com/digizuite/pulumi-timescale'
       },
       license='Apache-2.0',
       packages=find_packages(),

@@ -370,7 +370,7 @@ builds:
   - linux
   ignore: []
   ldflags:
-  - -X github.com/zlepper/pulumi-timescale/provider/pkg/version.Version={{.Tag}}
+  - -X github.com/digizuite/pulumi-timescale/provider/pkg/version.Version={{.Tag}}
   main: ./cmd/pulumi-resource-timescale/
   sort: asc
   use: git

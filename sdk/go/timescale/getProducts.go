@@ -4,8 +4,8 @@
 package timescale
 
 import (
+	"github.com/digizuite/pulumi-timescale/sdk/go/timescale/internal"
 	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
-	"github.com/zlepper/pulumi-timescale/sdk/go/timescale/internal"
 )
 
 func GetProducts(ctx *pulumi.Context, opts ...pulumi.InvokeOption) (*GetProductsResult, error) {
