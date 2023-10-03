@@ -231,6 +231,8 @@ jobs:
     name: tag_sdk
     needs: publish_sdk
     runs-on: ubuntu-latest
+    permissions:
+      contents: write
     steps:
       - name: Checkout Repo
         uses: actions/checkout@v3
