@@ -272,6 +272,8 @@ jobs:
         with:
           dotnet-version: ${{ env.DOTNETVERSION }}
           source-url: ${{ env.NUGET_FEED_URL }}
+        env:
+          NUGET_AUTH_TOKEN: ${{secrets.NUGET_PACKAGES_TOKEN}}
       - name: Download dotnet SDK
         uses: actions/download-artifact@v3
         with:
