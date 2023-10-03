@@ -43,7 +43,7 @@ jobs:
             sdk/go.sum
           go-version: 1.21.x
       - name: Install pulumictl
-        uses: jaxxstorm/action-install-gh-release@v1.5.0
+        uses: jaxxstorm/action-install-gh-release@v1.10.0
         with:
           repo: pulumi/pulumictl
       - name: Install Pulumi CLI
@@ -51,20 +51,20 @@ jobs:
         with:
           pulumi-version: v3.77.1
       - name: Setup Node
-        uses: actions/setup-node@v2
+        uses: actions/setup-node@v3
         with:
           node-version: ${{ env.NODEVERSION }}
           registry-url: https://registry.npmjs.org
       - name: Setup DotNet
-        uses: actions/setup-dotnet@v1
+        uses: actions/setup-dotnet@v3
         with:
           dotnet-version: ${{ env.DOTNETVERSION }}
       - name: Setup Python
-        uses: actions/setup-python@v2
+        uses: actions/setup-python@v4
         with:
           python-version: ${{ env.PYTHONVERSION }}
       - name: Download provider + tfgen binaries
-        uses: actions/download-artifact@v2
+        uses: actions/download-artifact@v3
         with:
           name: ${{ env.PROVIDER }}-provider.tar.gz
           path: ${{ github.workspace }}/bin
@@ -88,7 +88,7 @@ jobs:
       - name: Compress SDK folder
         run: tar -zcf sdk/${{ matrix.language }}.tar.gz -C sdk/${{ matrix.language }} .
       - name: Upload artifacts
-        uses: actions/upload-artifact@v2
+        uses: actions/upload-artifact@v3
         with:
           name: ${{ matrix.language  }}-sdk.tar.gz
           path: ${{ github.workspace}}/sdk/${{ matrix.language }}.tar.gz
@@ -106,7 +106,7 @@ jobs:
 #    runs-on: ubuntu-latest
 #    steps:
 #      - name: Install pulumictl
-#        uses: jaxxstorm/action-install-gh-release@v1.5.0
+#        uses: jaxxstorm/action-install-gh-release@v1.10.0
 #        with:
 #          repo: pulumi/pulumictl
 #      - env:
@@ -136,7 +136,7 @@ jobs:
             sdk/go.sum
           go-version: 1.21.x
       - name: Install pulumictl
-        uses: jaxxstorm/action-install-gh-release@v1.5.0
+        uses: jaxxstorm/action-install-gh-release@v1.10.0
         with:
           repo: pulumi/pulumictl
       - name: Install Pulumi CLI
@@ -145,7 +145,7 @@ jobs:
           pulumi-version: v3.77.1
       - if: github.event_name == 'pull_request'
         name: Install Schema Tools
-        uses: jaxxstorm/action-install-gh-release@v1.5.0
+        uses: jaxxstorm/action-install-gh-release@v1.10.0
         with:
           repo: pulumi/schema-tools
       - name: Build tfgen & provider binaries
@@ -179,7 +179,7 @@ jobs:
           github.workspace }}/bin/ pulumi-resource-${{ env.PROVIDER }}
           pulumi-tfgen-${{ env.PROVIDER }}
       - name: Upload artifacts
-        uses: actions/upload-artifact@v2
+        uses: actions/upload-artifact@v3
         with:
           name: ${{ env.PROVIDER }}-provider.tar.gz
           path: ${{ github.workspace }}/bin/provider.tar.gz
@@ -204,7 +204,7 @@ jobs:
             sdk/go.sum
           go-version: 1.21.x
       - name: Install pulumictl
-        uses: jaxxstorm/action-install-gh-release@v1.5.0
+        uses: jaxxstorm/action-install-gh-release@v1.10.0
         with:
           repo: pulumi/pulumictl
       - name: Install Pulumi CLI
@@ -237,7 +237,7 @@ jobs:
         with:
           submodules: true
       - name: Install pulumictl
-        uses: jaxxstorm/action-install-gh-release@v1.5.0
+        uses: jaxxstorm/action-install-gh-release@v1.10.0
         with:
           repo: pulumi/pulumictl
       - name: Add SDK version tag
@@ -289,7 +289,7 @@ jobs:
 #            sdk/go.sum
 #          go-version: 1.21.x
 #      - name: Install pulumictl
-#        uses: jaxxstorm/action-install-gh-release@v1.5.0
+#        uses: jaxxstorm/action-install-gh-release@v1.10.0
 #        with:
 #          repo: pulumi/pulumictl
 #      - name: Install Pulumi CLI
@@ -297,20 +297,20 @@ jobs:
 #        with:
 #          pulumi-version: v3.77.1
 #      - name: Setup Node
-#        uses: actions/setup-node@v2
+#        uses: actions/setup-node@v3
 #        with:
 #          node-version: ${{ env.NODEVERSION }}
 #          registry-url: https://registry.npmjs.org
 #      - name: Setup DotNet
-#        uses: actions/setup-dotnet@v1
+#        uses: actions/setup-dotnet@v3
 #        with:
 #          dotnet-version: ${{ env.DOTNETVERSION }}
 #      - name: Setup Python
-#        uses: actions/setup-python@v2
+#        uses: actions/setup-python@v4
 #        with:
 #          python-version: ${{ env.PYTHONVERSION }}
 #      - name: Download provider + tfgen binaries
-#        uses: actions/download-artifact@v2
+#        uses: actions/download-artifact@v3
 #        with:
 #          name: ${{ env.PROVIDER }}-provider.tar.gz
 #          path: ${{ github.workspace }}/bin
@@ -322,7 +322,7 @@ jobs:
 #          find ${{ github.workspace }} -name "pulumi-*-${{ env.PROVIDER }}" -print -exec chmod +x {} \;
 #      - run: dotnet nuget add source ${{ github.workspace }}/nuget
 #      - name: Download SDK
-#        uses: actions/download-artifact@v2
+#        uses: actions/download-artifact@v3
 #        with:
 #          name: ${{ matrix.language }}-sdk.tar.gz
 #          path: ${{ github.workspace}}/sdk/
