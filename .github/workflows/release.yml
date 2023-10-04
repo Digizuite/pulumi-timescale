@@ -222,6 +222,8 @@ jobs:
     name: publish_sdk
     needs: publish
     runs-on: ubuntu-latest
+    permissions:
+      packages: write
     steps:
       - name: Verify input
         run: echo 'Publishing SDK:' && echo ${{ inputs.sdk }}
@@ -273,7 +275,7 @@ jobs:
           dotnet-version: ${{ env.DOTNETVERSION }}
           source-url: ${{ env.NUGET_FEED_URL }}
         env:
-          NUGET_AUTH_TOKEN: ${{secrets.NUGET_PACKAGES_TOKEN}}
+          NUGET_AUTH_TOKEN: ${{secrets.GITHUB_TOKEN}}
       - name: Download dotnet SDK
         uses: actions/download-artifact@v3
         with:
