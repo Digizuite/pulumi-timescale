@@ -1,5 +1,6 @@
 {
     "name": "timescale",
+    "displayName": "Timescale Cloud",
     "description": "A Pulumi package for creating and managing timescale cloud resources.",
     "keywords": [
         "pulumi",
@@ -10,7 +11,7 @@
     "license": "Apache-2.0",
     "attribution": "This Pulumi package is based on the [`timescale` Terraform Provider](https://github.com/timescale/terraform-provider-timescale).",
     "repository": "https://github.com/digizuite/pulumi-timescale",
-    "publisher": "Pulumi",
+    "publisher": "Digizuite",
     "meta": {
         "moduleFormat": "(.*)(?:/[^/]*)"
     },
