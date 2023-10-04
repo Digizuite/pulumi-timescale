@@ -10,12 +10,10 @@ env:
   DOTNETVERSION: |
     6.0.x
     3.1.301
-  NUGET_PUBLISH_KEY: ${{ secrets.NUGET_PACKAGES_TOKEN }}
   NUGET_FEED_URL: https://nuget.pkg.github.com/digizuite/index.json
   PUBLISH_NUGET: true
   NODEVERSION: 20.x
 #  NODE_AUTH_TOKEN: ${{ secrets.NPM_TOKEN }}
-#  NUGET_PUBLISH_KEY: ${{ secrets.NUGET_PUBLISH_KEY }}
 #  PYPI_PASSWORD: ${{ secrets.PYPI_PASSWORD }}
   PYTHONVERSION: "3.9"
 #  SLACK_WEBHOOK_URL: ${{ secrets.SLACK_WEBHOOK_URL }}
@@ -287,7 +285,7 @@ jobs:
         shell: bash
       - name: Publish dotnet SDK
         run: find "${{ github.workspace }}/sdk/dotnet/bin/Debug/" -name 'Pulumi.*.nupkg'
-          -exec dotnet nuget push -k "${NUGET_PUBLISH_KEY}" -s "${{ env.NUGET_FEED_URL }}" {} \;
+          -exec dotnet nuget push -k "${{secrets.GITHUB_TOKEN}}" -s "${{ env.NUGET_FEED_URL }}" {} \;
         shell: bash
 #      - name: Setup Python
 #        uses: actions/setup-python@v2
