@@ -28,6 +28,12 @@ namespace Pulumi.Timescale
     public sealed class GetServiceArgs : global::Pulumi.InvokeArgs
     {
         /// <summary>
+        /// Environment tag for this service.
+        /// </summary>
+        [Input("environmentTag")]
+        public string? EnvironmentTag { get; set; }
+
+        /// <summary>
         /// Service ID is the unique identifier for this service
         /// </summary>
         [Input("id", required: true)]
@@ -47,6 +53,12 @@ namespace Pulumi.Timescale
 
     public sealed class GetServiceInvokeArgs : global::Pulumi.InvokeArgs
     {
+        /// <summary>
+        /// Environment tag for this service.
+        /// </summary>
+        [Input("environmentTag")]
+        public Input<string>? EnvironmentTag { get; set; }
+
         /// <summary>
         /// Service ID is the unique identifier for this service
         /// </summary>
@@ -74,6 +86,10 @@ namespace Pulumi.Timescale
         /// </summary>
         public readonly string Created;
         /// <summary>
+        /// Environment tag for this service.
+        /// </summary>
+        public readonly string EnvironmentTag;
+        /// <summary>
         /// Service ID is the unique identifier for this service
         /// </summary>
         public readonly string Id;
@@ -96,6 +112,8 @@ namespace Pulumi.Timescale
         private GetServiceResult(
             string created,
 
+            string environmentTag,
+
             string id,
 
             string name,
@@ -109,6 +127,7 @@ namespace Pulumi.Timescale
             int vpcId)
         {
             Created = created;
+            EnvironmentTag = environmentTag;
             Id = id;
             Name = name;
             RegionCode = regionCode;

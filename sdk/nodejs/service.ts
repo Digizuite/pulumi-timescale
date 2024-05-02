@@ -6,6 +6,22 @@ import * as inputs from "./types/input";
 import * as outputs from "./types/output";
 import * as utilities from "./utilities";
 
+/**
+ * ## Example Usage
+ *
+ * ```typescript
+ * import * as pulumi from "@pulumi/pulumi";
+ * import * as timescale from "@pulumi/timescale";
+ *
+ * const test = new timescale.Service("test", {});
+ * // name       = ""
+ * // milli_cpu  = 1000
+ * // memory_gb  = 4
+ * // region_code = ""
+ * // Read replica
+ * const readReplica = new timescale.Service("readReplica", {readReplicaSource: test.id});
+ * ```
+ */
 export class Service extends pulumi.CustomResource {
     /**
      * Get an existing Service resource's state with the given name, ID, and optional extra
@@ -35,9 +51,17 @@ export class Service extends pulumi.CustomResource {
     }
 
     /**
+     * Set connection pooler status for this service.
+     */
+    public readonly connectionPoolerEnabled!: pulumi.Output<boolean>;
+    /**
      * Enable HA Replica
      */
     public readonly enableHaReplica!: pulumi.Output<boolean>;
+    /**
+     * Set environment tag for this service.
+     */
+    public readonly environmentTag!: pulumi.Output<string>;
     /**
      * The hostname for this service
      */
@@ -59,11 +83,27 @@ export class Service extends pulumi.CustomResource {
      */
     public /*out*/ readonly password!: pulumi.Output<string>;
     /**
+     * Paused status of the service.
+     */
+    public readonly paused!: pulumi.Output<boolean>;
+    /**
+     * Hostname of the pooler of this service.
+     */
+    public /*out*/ readonly poolerHostname!: pulumi.Output<string>;
+    /**
+     * Port of the pooler of this service.
+     */
+    public /*out*/ readonly poolerPort!: pulumi.Output<number>;
+    /**
      * The port for this service
      */
     public /*out*/ readonly port!: pulumi.Output<number>;
     /**
-     * The region for this service. Currently supported regions are us-east-1, eu-west-1, us-west-2, eu-central-1, ap-southeast-2
+     * If set, this database will be a read replica of the provided source database. The region must be the same as the source, or if omitted will be handled by the provider
+     */
+    public readonly readReplicaSource!: pulumi.Output<string | undefined>;
+    /**
+     * The region for this service.
      */
     public readonly regionCode!: pulumi.Output<string>;
     /**
@@ -95,13 +135,19 @@ export class Service extends pulumi.CustomResource {
         opts = opts || {};
         if (opts.id) {
             const state = argsOrState as ServiceState | undefined;
+            resourceInputs["connectionPoolerEnabled"] = state ? state.connectionPoolerEnabled : undefined;
             resourceInputs["enableHaReplica"] = state ? state.enableHaReplica : undefined;
+            resourceInputs["environmentTag"] = state ? state.environmentTag : undefined;
             resourceInputs["hostname"] = state ? state.hostname : undefined;
             resourceInputs["memoryGb"] = state ? state.memoryGb : undefined;
             resourceInputs["milliCpu"] = state ? state.milliCpu : undefined;
             resourceInputs["name"] = state ? state.name : undefined;
             resourceInputs["password"] = state ? state.password : undefined;
+            resourceInputs["paused"] = state ? state.paused : undefined;
+            resourceInputs["poolerHostname"] = state ? state.poolerHostname : undefined;
+            resourceInputs["poolerPort"] = state ? state.poolerPort : undefined;
             resourceInputs["port"] = state ? state.port : undefined;
+            resourceInputs["readReplicaSource"] = state ? state.readReplicaSource : undefined;
             resourceInputs["regionCode"] = state ? state.regionCode : undefined;
             resourceInputs["storageGb"] = state ? state.storageGb : undefined;
             resourceInputs["timeouts"] = state ? state.timeouts : undefined;
@@ -109,16 +155,22 @@ export class Service extends pulumi.CustomResource {
             resourceInputs["vpcId"] = state ? state.vpcId : undefined;
         } else {
             const args = argsOrState as ServiceArgs | undefined;
+            resourceInputs["connectionPoolerEnabled"] = args ? args.connectionPoolerEnabled : undefined;
             resourceInputs["enableHaReplica"] = args ? args.enableHaReplica : undefined;
+            resourceInputs["environmentTag"] = args ? args.environmentTag : undefined;
             resourceInputs["memoryGb"] = args ? args.memoryGb : undefined;
             resourceInputs["milliCpu"] = args ? args.milliCpu : undefined;
             resourceInputs["name"] = args ? args.name : undefined;
+            resourceInputs["paused"] = args ? args.paused : undefined;
+            resourceInputs["readReplicaSource"] = args ? args.readReplicaSource : undefined;
             resourceInputs["regionCode"] = args ? args.regionCode : undefined;
             resourceInputs["storageGb"] = args ? args.storageGb : undefined;
             resourceInputs["timeouts"] = args ? args.timeouts : undefined;
             resourceInputs["vpcId"] = args ? args.vpcId : undefined;
             resourceInputs["hostname"] = undefined /*out*/;
             resourceInputs["password"] = undefined /*out*/;
+            resourceInputs["poolerHostname"] = undefined /*out*/;
+            resourceInputs["poolerPort"] = undefined /*out*/;
             resourceInputs["port"] = undefined /*out*/;
             resourceInputs["username"] = undefined /*out*/;
         }
@@ -134,9 +186,17 @@ export class Service extends pulumi.CustomResource {
  */
 export interface ServiceState {
     /**
+     * Set connection pooler status for this service.
+     */
+    connectionPoolerEnabled?: pulumi.Input<boolean>;
+    /**
      * Enable HA Replica
      */
     enableHaReplica?: pulumi.Input<boolean>;
+    /**
+     * Set environment tag for this service.
+     */
+    environmentTag?: pulumi.Input<string>;
     /**
      * The hostname for this service
      */
@@ -158,11 +218,27 @@ export interface ServiceState {
      */
     password?: pulumi.Input<string>;
     /**
+     * Paused status of the service.
+     */
+    paused?: pulumi.Input<boolean>;
+    /**
+     * Hostname of the pooler of this service.
+     */
+    poolerHostname?: pulumi.Input<string>;
+    /**
+     * Port of the pooler of this service.
+     */
+    poolerPort?: pulumi.Input<number>;
+    /**
      * The port for this service
      */
     port?: pulumi.Input<number>;
     /**
-     * The region for this service. Currently supported regions are us-east-1, eu-west-1, us-west-2, eu-central-1, ap-southeast-2
+     * If set, this database will be a read replica of the provided source database. The region must be the same as the source, or if omitted will be handled by the provider
+     */
+    readReplicaSource?: pulumi.Input<string>;
+    /**
+     * The region for this service.
      */
     regionCode?: pulumi.Input<string>;
     /**
@@ -187,9 +263,17 @@ export interface ServiceState {
  */
 export interface ServiceArgs {
     /**
+     * Set connection pooler status for this service.
+     */
+    connectionPoolerEnabled?: pulumi.Input<boolean>;
+    /**
      * Enable HA Replica
      */
     enableHaReplica?: pulumi.Input<boolean>;
+    /**
+     * Set environment tag for this service.
+     */
+    environmentTag?: pulumi.Input<string>;
     /**
      * Memory GB
      */
@@ -203,7 +287,15 @@ export interface ServiceArgs {
      */
     name?: pulumi.Input<string>;
     /**
-     * The region for this service. Currently supported regions are us-east-1, eu-west-1, us-west-2, eu-central-1, ap-southeast-2
+     * Paused status of the service.
+     */
+    paused?: pulumi.Input<boolean>;
+    /**
+     * If set, this database will be a read replica of the provided source database. The region must be the same as the source, or if omitted will be handled by the provider
+     */
+    readReplicaSource?: pulumi.Input<string>;
+    /**
+     * The region for this service.
      */
     regionCode?: pulumi.Input<string>;
     /**

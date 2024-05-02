@@ -14,29 +14,38 @@ namespace Pulumi.Timescale.Outputs
     public sealed class GetVpcsVpcPeeringConnectionResult
     {
         public readonly string ErrorMessage;
-        /// <summary>
-        /// The ID of this resource.
-        /// </summary>
-        public readonly int Id;
-        public readonly ImmutableArray<Outputs.GetVpcsVpcPeeringConnectionPeerVpcResult> PeerVpcs;
+        public readonly string PeerAccountId;
+        public readonly string PeerCidr;
+        public readonly string PeerRegionCode;
+        public readonly string PeerVpcId;
+        public readonly string ProvisionedId;
         public readonly string Status;
-        public readonly int VpcId;
+        public readonly string VpcId;
 
         [OutputConstructor]
         private GetVpcsVpcPeeringConnectionResult(
             string errorMessage,
 
-            int id,
+            string peerAccountId,
 
-            ImmutableArray<Outputs.GetVpcsVpcPeeringConnectionPeerVpcResult> peerVpcs,
+            string peerCidr,
+
+            string peerRegionCode,
+
+            string peerVpcId,
+
+            string provisionedId,
 
             string status,
 
-            int vpcId)
+            string vpcId)
         {
             ErrorMessage = errorMessage;
-            Id = id;
-            PeerVpcs = peerVpcs;
+            PeerAccountId = peerAccountId;
+            PeerCidr = peerCidr;
+            PeerRegionCode = peerRegionCode;
+            PeerVpcId = peerVpcId;
+            ProvisionedId = provisionedId;
             Status = status;
             VpcId = vpcId;
         }

@@ -8,9 +8,9 @@ import (
 	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
 )
 
-func GetVpcs(ctx *pulumi.Context, opts ...pulumi.InvokeOption) (*GetVpcsResult, error) {
+func LookupVpcs(ctx *pulumi.Context, opts ...pulumi.InvokeOption) (*LookupVpcsResult, error) {
 	opts = internal.PkgInvokeDefaultOpts(opts)
-	var rv GetVpcsResult
+	var rv LookupVpcsResult
 	err := ctx.Invoke("timescale:index/getVpcs:getVpcs", nil, &rv, opts...)
 	if err != nil {
 		return nil, err
@@ -19,7 +19,7 @@ func GetVpcs(ctx *pulumi.Context, opts ...pulumi.InvokeOption) (*GetVpcsResult, 
 }
 
 // A collection of values returned by getVpcs.
-type GetVpcsResult struct {
+type LookupVpcsResult struct {
 	// The ID of this resource.
 	Id   string       `pulumi:"id"`
 	Vpcs []GetVpcsVpc `pulumi:"vpcs"`

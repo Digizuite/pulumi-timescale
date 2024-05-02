@@ -8,8 +8,10 @@ import typing
 from .get_products import *
 from .get_service import *
 from .get_vpcs import *
+from .peering_connection import *
 from .provider import *
 from .service import *
+from .vpcs import *
 from ._inputs import *
 from . import outputs
 
@@ -25,10 +27,26 @@ _utilities.register(
 [
  {
   "pkg": "timescale",
+  "mod": "index/peeringConnection",
+  "fqn": "pulumi_timescale",
+  "classes": {
+   "timescale:index/peeringConnection:PeeringConnection": "PeeringConnection"
+  }
+ },
+ {
+  "pkg": "timescale",
   "mod": "index/service",
   "fqn": "pulumi_timescale",
   "classes": {
    "timescale:index/service:Service": "Service"
+  }
+ },
+ {
+  "pkg": "timescale",
+  "mod": "index/vpcs",
+  "fqn": "pulumi_timescale",
+  "classes": {
+   "timescale:index/vpcs:Vpcs": "Vpcs"
   }
  }
 ]

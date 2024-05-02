@@ -9,14 +9,52 @@ using Pulumi.Serialization;
 
 namespace Pulumi.Timescale
 {
+    /// <summary>
+    /// ## Example Usage
+    /// 
+    /// ```csharp
+    /// using System.Collections.Generic;
+    /// using System.Linq;
+    /// using Pulumi;
+    /// using Timescale = Pulumi.Timescale;
+    /// 
+    /// return await Deployment.RunAsync(() =&gt; 
+    /// {
+    ///     var test = new Timescale.Service("test");
+    /// 
+    ///     // name       = ""
+    ///     // milli_cpu  = 1000
+    ///     // memory_gb  = 4
+    ///     // region_code = ""
+    ///     // Read replica
+    ///     var readReplica = new Timescale.Service("readReplica", new()
+    ///     {
+    ///         ReadReplicaSource = test.Id,
+    ///     });
+    /// 
+    /// });
+    /// ```
+    /// </summary>
     [TimescaleResourceType("timescale:index/service:Service")]
     public partial class Service : global::Pulumi.CustomResource
     {
+        /// <summary>
+        /// Set connection pooler status for this service.
+        /// </summary>
+        [Output("connectionPoolerEnabled")]
+        public Output<bool> ConnectionPoolerEnabled { get; private set; } = null!;
+
         /// <summary>
         /// Enable HA Replica
         /// </summary>
         [Output("enableHaReplica")]
         public Output<bool> EnableHaReplica { get; private set; } = null!;
+
+        /// <summary>
+        /// Set environment tag for this service.
+        /// </summary>
+        [Output("environmentTag")]
+        public Output<string> EnvironmentTag { get; private set; } = null!;
 
         /// <summary>
         /// The hostname for this service
@@ -49,13 +87,37 @@ namespace Pulumi.Timescale
         public Output<string> Password { get; private set; } = null!;
 
         /// <summary>
+        /// Paused status of the service.
+        /// </summary>
+        [Output("paused")]
+        public Output<bool> Paused { get; private set; } = null!;
+
+        /// <summary>
+        /// Hostname of the pooler of this service.
+        /// </summary>
+        [Output("poolerHostname")]
+        public Output<string> PoolerHostname { get; private set; } = null!;
+
+        /// <summary>
+        /// Port of the pooler of this service.
+        /// </summary>
+        [Output("poolerPort")]
+        public Output<int> PoolerPort { get; private set; } = null!;
+
+        /// <summary>
         /// The port for this service
         /// </summary>
         [Output("port")]
         public Output<int> Port { get; private set; } = null!;
 
         /// <summary>
-        /// The region for this service. Currently supported regions are us-east-1, eu-west-1, us-west-2, eu-central-1, ap-southeast-2
+        /// If set, this database will be a read replica of the provided source database. The region must be the same as the source, or if omitted will be handled by the provider
+        /// </summary>
+        [Output("readReplicaSource")]
+        public Output<string?> ReadReplicaSource { get; private set; } = null!;
+
+        /// <summary>
+        /// The region for this service.
         /// </summary>
         [Output("regionCode")]
         public Output<string> RegionCode { get; private set; } = null!;
@@ -132,10 +194,22 @@ namespace Pulumi.Timescale
     public sealed class ServiceArgs : global::Pulumi.ResourceArgs
     {
         /// <summary>
+        /// Set connection pooler status for this service.
+        /// </summary>
+        [Input("connectionPoolerEnabled")]
+        public Input<bool>? ConnectionPoolerEnabled { get; set; }
+
+        /// <summary>
         /// Enable HA Replica
         /// </summary>
         [Input("enableHaReplica")]
         public Input<bool>? EnableHaReplica { get; set; }
+
+        /// <summary>
+        /// Set environment tag for this service.
+        /// </summary>
+        [Input("environmentTag")]
+        public Input<string>? EnvironmentTag { get; set; }
 
         /// <summary>
         /// Memory GB
@@ -156,7 +230,19 @@ namespace Pulumi.Timescale
         public Input<string>? Name { get; set; }
 
         /// <summary>
-        /// The region for this service. Currently supported regions are us-east-1, eu-west-1, us-west-2, eu-central-1, ap-southeast-2
+        /// Paused status of the service.
+        /// </summary>
+        [Input("paused")]
+        public Input<bool>? Paused { get; set; }
+
+        /// <summary>
+        /// If set, this database will be a read replica of the provided source database. The region must be the same as the source, or if omitted will be handled by the provider
+        /// </summary>
+        [Input("readReplicaSource")]
+        public Input<string>? ReadReplicaSource { get; set; }
+
+        /// <summary>
+        /// The region for this service.
         /// </summary>
         [Input("regionCode")]
         public Input<string>? RegionCode { get; set; }
@@ -185,10 +271,22 @@ namespace Pulumi.Timescale
     public sealed class ServiceState : global::Pulumi.ResourceArgs
     {
         /// <summary>
+        /// Set connection pooler status for this service.
+        /// </summary>
+        [Input("connectionPoolerEnabled")]
+        public Input<bool>? ConnectionPoolerEnabled { get; set; }
+
+        /// <summary>
         /// Enable HA Replica
         /// </summary>
         [Input("enableHaReplica")]
         public Input<bool>? EnableHaReplica { get; set; }
+
+        /// <summary>
+        /// Set environment tag for this service.
+        /// </summary>
+        [Input("environmentTag")]
+        public Input<string>? EnvironmentTag { get; set; }
 
         /// <summary>
         /// The hostname for this service
@@ -231,13 +329,37 @@ namespace Pulumi.Timescale
         }
 
         /// <summary>
+        /// Paused status of the service.
+        /// </summary>
+        [Input("paused")]
+        public Input<bool>? Paused { get; set; }
+
+        /// <summary>
+        /// Hostname of the pooler of this service.
+        /// </summary>
+        [Input("poolerHostname")]
+        public Input<string>? PoolerHostname { get; set; }
+
+        /// <summary>
+        /// Port of the pooler of this service.
+        /// </summary>
+        [Input("poolerPort")]
+        public Input<int>? PoolerPort { get; set; }
+
+        /// <summary>
         /// The port for this service
         /// </summary>
         [Input("port")]
         public Input<int>? Port { get; set; }
 
         /// <summary>
-        /// The region for this service. Currently supported regions are us-east-1, eu-west-1, us-west-2, eu-central-1, ap-southeast-2
+        /// If set, this database will be a read replica of the provided source database. The region must be the same as the source, or if omitted will be handled by the provider
+        /// </summary>
+        [Input("readReplicaSource")]
+        public Input<string>? ReadReplicaSource { get; set; }
+
+        /// <summary>
+        /// The region for this service.
         /// </summary>
         [Input("regionCode")]
         public Input<string>? RegionCode { get; set; }

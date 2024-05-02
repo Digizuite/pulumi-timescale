@@ -20,6 +20,11 @@ export const getVpcs: typeof import("./getVpcs").getVpcs = null as any;
 export const getVpcsOutput: typeof import("./getVpcs").getVpcsOutput = null as any;
 utilities.lazyLoad(exports, ["getVpcs","getVpcsOutput"], () => require("./getVpcs"));
 
+export { PeeringConnectionArgs, PeeringConnectionState } from "./peeringConnection";
+export type PeeringConnection = import("./peeringConnection").PeeringConnection;
+export const PeeringConnection: typeof import("./peeringConnection").PeeringConnection = null as any;
+utilities.lazyLoad(exports, ["PeeringConnection"], () => require("./peeringConnection"));
+
 export { ProviderArgs } from "./provider";
 export type Provider = import("./provider").Provider;
 export const Provider: typeof import("./provider").Provider = null as any;
@@ -29,6 +34,11 @@ export { ServiceArgs, ServiceState } from "./service";
 export type Service = import("./service").Service;
 export const Service: typeof import("./service").Service = null as any;
 utilities.lazyLoad(exports, ["Service"], () => require("./service"));
+
+export { VpcsArgs, VpcsState } from "./vpcs";
+export type Vpcs = import("./vpcs").Vpcs;
+export const Vpcs: typeof import("./vpcs").Vpcs = null as any;
+utilities.lazyLoad(exports, ["Vpcs"], () => require("./vpcs"));
 
 
 // Export sub-modules:
@@ -44,14 +54,20 @@ const _module = {
     version: utilities.getVersion(),
     construct: (name: string, type: string, urn: string): pulumi.Resource => {
         switch (type) {
+            case "timescale:index/peeringConnection:PeeringConnection":
+                return new PeeringConnection(name, <any>undefined, { urn })
             case "timescale:index/service:Service":
                 return new Service(name, <any>undefined, { urn })
+            case "timescale:index/vpcs:Vpcs":
+                return new Vpcs(name, <any>undefined, { urn })
             default:
                 throw new Error(`unknown resource type ${type}`);
         }
     },
 };
+pulumi.runtime.registerResourceModule("timescale", "index/peeringConnection", _module)
 pulumi.runtime.registerResourceModule("timescale", "index/service", _module)
+pulumi.runtime.registerResourceModule("timescale", "index/vpcs", _module)
 pulumi.runtime.registerResourcePackage("timescale", {
     version: utilities.getVersion(),
     constructProvider: (name: string, type: string, urn: string): pulumi.ProviderResource => {

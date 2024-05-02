@@ -1,8 +1,14 @@
 {
     "auto-aliasing": {
         "resources": {
+            "timescale_peering_connection": {
+                "current": "timescale:index/peeringConnection:PeeringConnection"
+            },
             "timescale_service": {
                 "current": "timescale:index/service:Service"
+            },
+            "timescale_vpcs": {
+                "current": "timescale:index/vpcs:Vpcs"
             }
         },
         "datasources": {
@@ -61,7 +67,9 @@
     },
     "renames": {
         "resources": {
-            "timescale:index/service:Service": "timescale_service"
+            "timescale:index/peeringConnection:PeeringConnection": "timescale_peering_connection",
+            "timescale:index/service:Service": "timescale_service",
+            "timescale:index/vpcs:Vpcs": "timescale_vpcs"
         },
         "functions": {
             "timescale:index/getProducts:getProducts": "timescale_products",
@@ -76,6 +84,7 @@
                 "regionCode": "region_code"
             },
             "timescale:index/getService:getService": {
+                "environmentTag": "environment_tag",
                 "regionCode": "region_code",
                 "vpcId": "vpc_id"
             },
@@ -83,6 +92,10 @@
                 "enableHaReplica": "enable_ha_replica",
                 "memoryGb": "memory_gb",
                 "milliCpu": "milli_cpu"
+            },
+            "timescale:index/getServiceSpec:getServiceSpec": {
+                "poolerHostname": "pooler_hostname",
+                "poolerPort": "pooler_port"
             },
             "timescale:index/getVpcsVpc:getVpcsVpc": {
                 "errorMessage": "error_message",
@@ -93,20 +106,41 @@
             },
             "timescale:index/getVpcsVpcPeeringConnection:getVpcsVpcPeeringConnection": {
                 "errorMessage": "error_message",
-                "peerVpcs": "peer_vpc",
+                "peerAccountId": "peer_account_id",
+                "peerCidr": "peer_cidr",
+                "peerRegionCode": "peer_region_code",
+                "peerVpcId": "peer_vpc_id",
+                "provisionedId": "provisioned_id",
                 "vpcId": "vpc_id"
             },
-            "timescale:index/getVpcsVpcPeeringConnectionPeerVpc:getVpcsVpcPeeringConnectionPeerVpc": {
-                "accountId": "account_id",
-                "regionCode": "region_code"
+            "timescale:index/peeringConnection:PeeringConnection": {
+                "errorMessage": "error_message",
+                "peerAccountId": "peer_account_id",
+                "peerCidr": "peer_cidr",
+                "peerRegionCode": "peer_region_code",
+                "peerVpcId": "peer_vpc_id",
+                "provisionedId": "provisioned_id",
+                "timescaleVpcId": "timescale_vpc_id",
+                "vpcId": "vpc_id"
             },
             "timescale:index/service:Service": {
+                "connectionPoolerEnabled": "connection_pooler_enabled",
                 "enableHaReplica": "enable_ha_replica",
+                "environmentTag": "environment_tag",
                 "memoryGb": "memory_gb",
                 "milliCpu": "milli_cpu",
+                "poolerHostname": "pooler_hostname",
+                "poolerPort": "pooler_port",
+                "readReplicaSource": "read_replica_source",
                 "regionCode": "region_code",
                 "storageGb": "storage_gb",
                 "vpcId": "vpc_id"
+            },
+            "timescale:index/vpcs:Vpcs": {
+                "errorMessage": "error_message",
+                "projectId": "project_id",
+                "provisionedId": "provisioned_id",
+                "regionCode": "region_code"
             },
             "timescale:index:Provider": {
                 "accessKey": "access_key",

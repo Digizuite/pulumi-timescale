@@ -175,6 +175,167 @@ func (o ServiceTimeoutsPtrOutput) Create() pulumi.StringPtrOutput {
 	}).(pulumi.StringPtrOutput)
 }
 
+type VpcsTimeouts struct {
+	// A string that can be [parsed as a duration](https://pkg.go.dev/time#ParseDuration) consisting of numbers and unit suffixes, such as "30s" or "2h45m". Valid time units are "s" (seconds), "m" (minutes), "h" (hours).
+	Create *string `pulumi:"create"`
+}
+
+// VpcsTimeoutsInput is an input type that accepts VpcsTimeoutsArgs and VpcsTimeoutsOutput values.
+// You can construct a concrete instance of `VpcsTimeoutsInput` via:
+//
+//	VpcsTimeoutsArgs{...}
+type VpcsTimeoutsInput interface {
+	pulumi.Input
+
+	ToVpcsTimeoutsOutput() VpcsTimeoutsOutput
+	ToVpcsTimeoutsOutputWithContext(context.Context) VpcsTimeoutsOutput
+}
+
+type VpcsTimeoutsArgs struct {
+	// A string that can be [parsed as a duration](https://pkg.go.dev/time#ParseDuration) consisting of numbers and unit suffixes, such as "30s" or "2h45m". Valid time units are "s" (seconds), "m" (minutes), "h" (hours).
+	Create pulumi.StringPtrInput `pulumi:"create"`
+}
+
+func (VpcsTimeoutsArgs) ElementType() reflect.Type {
+	return reflect.TypeOf((*VpcsTimeouts)(nil)).Elem()
+}
+
+func (i VpcsTimeoutsArgs) ToVpcsTimeoutsOutput() VpcsTimeoutsOutput {
+	return i.ToVpcsTimeoutsOutputWithContext(context.Background())
+}
+
+func (i VpcsTimeoutsArgs) ToVpcsTimeoutsOutputWithContext(ctx context.Context) VpcsTimeoutsOutput {
+	return pulumi.ToOutputWithContext(ctx, i).(VpcsTimeoutsOutput)
+}
+
+func (i VpcsTimeoutsArgs) ToOutput(ctx context.Context) pulumix.Output[VpcsTimeouts] {
+	return pulumix.Output[VpcsTimeouts]{
+		OutputState: i.ToVpcsTimeoutsOutputWithContext(ctx).OutputState,
+	}
+}
+
+func (i VpcsTimeoutsArgs) ToVpcsTimeoutsPtrOutput() VpcsTimeoutsPtrOutput {
+	return i.ToVpcsTimeoutsPtrOutputWithContext(context.Background())
+}
+
+func (i VpcsTimeoutsArgs) ToVpcsTimeoutsPtrOutputWithContext(ctx context.Context) VpcsTimeoutsPtrOutput {
+	return pulumi.ToOutputWithContext(ctx, i).(VpcsTimeoutsOutput).ToVpcsTimeoutsPtrOutputWithContext(ctx)
+}
+
+// VpcsTimeoutsPtrInput is an input type that accepts VpcsTimeoutsArgs, VpcsTimeoutsPtr and VpcsTimeoutsPtrOutput values.
+// You can construct a concrete instance of `VpcsTimeoutsPtrInput` via:
+//
+//	        VpcsTimeoutsArgs{...}
+//
+//	or:
+//
+//	        nil
+type VpcsTimeoutsPtrInput interface {
+	pulumi.Input
+
+	ToVpcsTimeoutsPtrOutput() VpcsTimeoutsPtrOutput
+	ToVpcsTimeoutsPtrOutputWithContext(context.Context) VpcsTimeoutsPtrOutput
+}
+
+type vpcsTimeoutsPtrType VpcsTimeoutsArgs
+
+func VpcsTimeoutsPtr(v *VpcsTimeoutsArgs) VpcsTimeoutsPtrInput {
+	return (*vpcsTimeoutsPtrType)(v)
+}
+
+func (*vpcsTimeoutsPtrType) ElementType() reflect.Type {
+	return reflect.TypeOf((**VpcsTimeouts)(nil)).Elem()
+}
+
+func (i *vpcsTimeoutsPtrType) ToVpcsTimeoutsPtrOutput() VpcsTimeoutsPtrOutput {
+	return i.ToVpcsTimeoutsPtrOutputWithContext(context.Background())
+}
+
+func (i *vpcsTimeoutsPtrType) ToVpcsTimeoutsPtrOutputWithContext(ctx context.Context) VpcsTimeoutsPtrOutput {
+	return pulumi.ToOutputWithContext(ctx, i).(VpcsTimeoutsPtrOutput)
+}
+
+func (i *vpcsTimeoutsPtrType) ToOutput(ctx context.Context) pulumix.Output[*VpcsTimeouts] {
+	return pulumix.Output[*VpcsTimeouts]{
+		OutputState: i.ToVpcsTimeoutsPtrOutputWithContext(ctx).OutputState,
+	}
+}
+
+type VpcsTimeoutsOutput struct{ *pulumi.OutputState }
+
+func (VpcsTimeoutsOutput) ElementType() reflect.Type {
+	return reflect.TypeOf((*VpcsTimeouts)(nil)).Elem()
+}
+
+func (o VpcsTimeoutsOutput) ToVpcsTimeoutsOutput() VpcsTimeoutsOutput {
+	return o
+}
+
+func (o VpcsTimeoutsOutput) ToVpcsTimeoutsOutputWithContext(ctx context.Context) VpcsTimeoutsOutput {
+	return o
+}
+
+func (o VpcsTimeoutsOutput) ToVpcsTimeoutsPtrOutput() VpcsTimeoutsPtrOutput {
+	return o.ToVpcsTimeoutsPtrOutputWithContext(context.Background())
+}
+
+func (o VpcsTimeoutsOutput) ToVpcsTimeoutsPtrOutputWithContext(ctx context.Context) VpcsTimeoutsPtrOutput {
+	return o.ApplyTWithContext(ctx, func(_ context.Context, v VpcsTimeouts) *VpcsTimeouts {
+		return &v
+	}).(VpcsTimeoutsPtrOutput)
+}
+
+func (o VpcsTimeoutsOutput) ToOutput(ctx context.Context) pulumix.Output[VpcsTimeouts] {
+	return pulumix.Output[VpcsTimeouts]{
+		OutputState: o.OutputState,
+	}
+}
+
+// A string that can be [parsed as a duration](https://pkg.go.dev/time#ParseDuration) consisting of numbers and unit suffixes, such as "30s" or "2h45m". Valid time units are "s" (seconds), "m" (minutes), "h" (hours).
+func (o VpcsTimeoutsOutput) Create() pulumi.StringPtrOutput {
+	return o.ApplyT(func(v VpcsTimeouts) *string { return v.Create }).(pulumi.StringPtrOutput)
+}
+
+type VpcsTimeoutsPtrOutput struct{ *pulumi.OutputState }
+
+func (VpcsTimeoutsPtrOutput) ElementType() reflect.Type {
+	return reflect.TypeOf((**VpcsTimeouts)(nil)).Elem()
+}
+
+func (o VpcsTimeoutsPtrOutput) ToVpcsTimeoutsPtrOutput() VpcsTimeoutsPtrOutput {
+	return o
+}
+
+func (o VpcsTimeoutsPtrOutput) ToVpcsTimeoutsPtrOutputWithContext(ctx context.Context) VpcsTimeoutsPtrOutput {
+	return o
+}
+
+func (o VpcsTimeoutsPtrOutput) ToOutput(ctx context.Context) pulumix.Output[*VpcsTimeouts] {
+	return pulumix.Output[*VpcsTimeouts]{
+		OutputState: o.OutputState,
+	}
+}
+
+func (o VpcsTimeoutsPtrOutput) Elem() VpcsTimeoutsOutput {
+	return o.ApplyT(func(v *VpcsTimeouts) VpcsTimeouts {
+		if v != nil {
+			return *v
+		}
+		var ret VpcsTimeouts
+		return ret
+	}).(VpcsTimeoutsOutput)
+}
+
+// A string that can be [parsed as a duration](https://pkg.go.dev/time#ParseDuration) consisting of numbers and unit suffixes, such as "30s" or "2h45m". Valid time units are "s" (seconds), "m" (minutes), "h" (hours).
+func (o VpcsTimeoutsPtrOutput) Create() pulumi.StringPtrOutput {
+	return o.ApplyT(func(v *VpcsTimeouts) *string {
+		if v == nil {
+			return nil
+		}
+		return v.Create
+	}).(pulumi.StringPtrOutput)
+}
+
 type GetProductsProduct struct {
 	Description string `pulumi:"description"`
 	// The ID of this resource.
@@ -668,6 +829,10 @@ func (o GetServiceResourceSpecOutput) MilliCpu() pulumi.IntOutput {
 type GetServiceSpec struct {
 	// Hostname is the hostname of this service.
 	Hostname string `pulumi:"hostname"`
+	// Hostname of the pooler of this service.
+	PoolerHostname string `pulumi:"poolerHostname"`
+	// Port of the pooler of this service.
+	PoolerPort int `pulumi:"poolerPort"`
 	// Port is the port assigned to this service.
 	Port int `pulumi:"port"`
 	// Username is the Postgres username.
@@ -688,6 +853,10 @@ type GetServiceSpecInput interface {
 type GetServiceSpecArgs struct {
 	// Hostname is the hostname of this service.
 	Hostname pulumi.StringInput `pulumi:"hostname"`
+	// Hostname of the pooler of this service.
+	PoolerHostname pulumi.StringInput `pulumi:"poolerHostname"`
+	// Port of the pooler of this service.
+	PoolerPort pulumi.IntInput `pulumi:"poolerPort"`
 	// Port is the port assigned to this service.
 	Port pulumi.IntInput `pulumi:"port"`
 	// Username is the Postgres username.
@@ -735,6 +904,16 @@ func (o GetServiceSpecOutput) ToOutput(ctx context.Context) pulumix.Output[GetSe
 // Hostname is the hostname of this service.
 func (o GetServiceSpecOutput) Hostname() pulumi.StringOutput {
 	return o.ApplyT(func(v GetServiceSpec) string { return v.Hostname }).(pulumi.StringOutput)
+}
+
+// Hostname of the pooler of this service.
+func (o GetServiceSpecOutput) PoolerHostname() pulumi.StringOutput {
+	return o.ApplyT(func(v GetServiceSpec) string { return v.PoolerHostname }).(pulumi.StringOutput)
+}
+
+// Port of the pooler of this service.
+func (o GetServiceSpecOutput) PoolerPort() pulumi.IntOutput {
+	return o.ApplyT(func(v GetServiceSpec) int { return v.PoolerPort }).(pulumi.IntOutput)
 }
 
 // Port is the port assigned to this service.
@@ -929,12 +1108,14 @@ func (o GetVpcsVpcArrayOutput) Index(i pulumi.IntInput) GetVpcsVpcOutput {
 }
 
 type GetVpcsVpcPeeringConnection struct {
-	ErrorMessage string `pulumi:"errorMessage"`
-	// The ID of this resource.
-	Id       int                                  `pulumi:"id"`
-	PeerVpcs []GetVpcsVpcPeeringConnectionPeerVpc `pulumi:"peerVpcs"`
-	Status   string                               `pulumi:"status"`
-	VpcId    int                                  `pulumi:"vpcId"`
+	ErrorMessage   string `pulumi:"errorMessage"`
+	PeerAccountId  string `pulumi:"peerAccountId"`
+	PeerCidr       string `pulumi:"peerCidr"`
+	PeerRegionCode string `pulumi:"peerRegionCode"`
+	PeerVpcId      string `pulumi:"peerVpcId"`
+	ProvisionedId  string `pulumi:"provisionedId"`
+	Status         string `pulumi:"status"`
+	VpcId          string `pulumi:"vpcId"`
 }
 
 // GetVpcsVpcPeeringConnectionInput is an input type that accepts GetVpcsVpcPeeringConnectionArgs and GetVpcsVpcPeeringConnectionOutput values.
@@ -949,12 +1130,14 @@ type GetVpcsVpcPeeringConnectionInput interface {
 }
 
 type GetVpcsVpcPeeringConnectionArgs struct {
-	ErrorMessage pulumi.StringInput `pulumi:"errorMessage"`
-	// The ID of this resource.
-	Id       pulumi.IntInput                              `pulumi:"id"`
-	PeerVpcs GetVpcsVpcPeeringConnectionPeerVpcArrayInput `pulumi:"peerVpcs"`
-	Status   pulumi.StringInput                           `pulumi:"status"`
-	VpcId    pulumi.IntInput                              `pulumi:"vpcId"`
+	ErrorMessage   pulumi.StringInput `pulumi:"errorMessage"`
+	PeerAccountId  pulumi.StringInput `pulumi:"peerAccountId"`
+	PeerCidr       pulumi.StringInput `pulumi:"peerCidr"`
+	PeerRegionCode pulumi.StringInput `pulumi:"peerRegionCode"`
+	PeerVpcId      pulumi.StringInput `pulumi:"peerVpcId"`
+	ProvisionedId  pulumi.StringInput `pulumi:"provisionedId"`
+	Status         pulumi.StringInput `pulumi:"status"`
+	VpcId          pulumi.StringInput `pulumi:"vpcId"`
 }
 
 func (GetVpcsVpcPeeringConnectionArgs) ElementType() reflect.Type {
@@ -1030,21 +1213,32 @@ func (o GetVpcsVpcPeeringConnectionOutput) ErrorMessage() pulumi.StringOutput {
 	return o.ApplyT(func(v GetVpcsVpcPeeringConnection) string { return v.ErrorMessage }).(pulumi.StringOutput)
 }
 
-// The ID of this resource.
-func (o GetVpcsVpcPeeringConnectionOutput) Id() pulumi.IntOutput {
-	return o.ApplyT(func(v GetVpcsVpcPeeringConnection) int { return v.Id }).(pulumi.IntOutput)
+func (o GetVpcsVpcPeeringConnectionOutput) PeerAccountId() pulumi.StringOutput {
+	return o.ApplyT(func(v GetVpcsVpcPeeringConnection) string { return v.PeerAccountId }).(pulumi.StringOutput)
 }
 
-func (o GetVpcsVpcPeeringConnectionOutput) PeerVpcs() GetVpcsVpcPeeringConnectionPeerVpcArrayOutput {
-	return o.ApplyT(func(v GetVpcsVpcPeeringConnection) []GetVpcsVpcPeeringConnectionPeerVpc { return v.PeerVpcs }).(GetVpcsVpcPeeringConnectionPeerVpcArrayOutput)
+func (o GetVpcsVpcPeeringConnectionOutput) PeerCidr() pulumi.StringOutput {
+	return o.ApplyT(func(v GetVpcsVpcPeeringConnection) string { return v.PeerCidr }).(pulumi.StringOutput)
+}
+
+func (o GetVpcsVpcPeeringConnectionOutput) PeerRegionCode() pulumi.StringOutput {
+	return o.ApplyT(func(v GetVpcsVpcPeeringConnection) string { return v.PeerRegionCode }).(pulumi.StringOutput)
+}
+
+func (o GetVpcsVpcPeeringConnectionOutput) PeerVpcId() pulumi.StringOutput {
+	return o.ApplyT(func(v GetVpcsVpcPeeringConnection) string { return v.PeerVpcId }).(pulumi.StringOutput)
+}
+
+func (o GetVpcsVpcPeeringConnectionOutput) ProvisionedId() pulumi.StringOutput {
+	return o.ApplyT(func(v GetVpcsVpcPeeringConnection) string { return v.ProvisionedId }).(pulumi.StringOutput)
 }
 
 func (o GetVpcsVpcPeeringConnectionOutput) Status() pulumi.StringOutput {
 	return o.ApplyT(func(v GetVpcsVpcPeeringConnection) string { return v.Status }).(pulumi.StringOutput)
 }
 
-func (o GetVpcsVpcPeeringConnectionOutput) VpcId() pulumi.IntOutput {
-	return o.ApplyT(func(v GetVpcsVpcPeeringConnection) int { return v.VpcId }).(pulumi.IntOutput)
+func (o GetVpcsVpcPeeringConnectionOutput) VpcId() pulumi.StringOutput {
+	return o.ApplyT(func(v GetVpcsVpcPeeringConnection) string { return v.VpcId }).(pulumi.StringOutput)
 }
 
 type GetVpcsVpcPeeringConnectionArrayOutput struct{ *pulumi.OutputState }
@@ -1073,148 +1267,11 @@ func (o GetVpcsVpcPeeringConnectionArrayOutput) Index(i pulumi.IntInput) GetVpcs
 	}).(GetVpcsVpcPeeringConnectionOutput)
 }
 
-type GetVpcsVpcPeeringConnectionPeerVpc struct {
-	AccountId string `pulumi:"accountId"`
-	Cidr      string `pulumi:"cidr"`
-	// The ID of this resource.
-	Id         int    `pulumi:"id"`
-	RegionCode string `pulumi:"regionCode"`
-}
-
-// GetVpcsVpcPeeringConnectionPeerVpcInput is an input type that accepts GetVpcsVpcPeeringConnectionPeerVpcArgs and GetVpcsVpcPeeringConnectionPeerVpcOutput values.
-// You can construct a concrete instance of `GetVpcsVpcPeeringConnectionPeerVpcInput` via:
-//
-//	GetVpcsVpcPeeringConnectionPeerVpcArgs{...}
-type GetVpcsVpcPeeringConnectionPeerVpcInput interface {
-	pulumi.Input
-
-	ToGetVpcsVpcPeeringConnectionPeerVpcOutput() GetVpcsVpcPeeringConnectionPeerVpcOutput
-	ToGetVpcsVpcPeeringConnectionPeerVpcOutputWithContext(context.Context) GetVpcsVpcPeeringConnectionPeerVpcOutput
-}
-
-type GetVpcsVpcPeeringConnectionPeerVpcArgs struct {
-	AccountId pulumi.StringInput `pulumi:"accountId"`
-	Cidr      pulumi.StringInput `pulumi:"cidr"`
-	// The ID of this resource.
-	Id         pulumi.IntInput    `pulumi:"id"`
-	RegionCode pulumi.StringInput `pulumi:"regionCode"`
-}
-
-func (GetVpcsVpcPeeringConnectionPeerVpcArgs) ElementType() reflect.Type {
-	return reflect.TypeOf((*GetVpcsVpcPeeringConnectionPeerVpc)(nil)).Elem()
-}
-
-func (i GetVpcsVpcPeeringConnectionPeerVpcArgs) ToGetVpcsVpcPeeringConnectionPeerVpcOutput() GetVpcsVpcPeeringConnectionPeerVpcOutput {
-	return i.ToGetVpcsVpcPeeringConnectionPeerVpcOutputWithContext(context.Background())
-}
-
-func (i GetVpcsVpcPeeringConnectionPeerVpcArgs) ToGetVpcsVpcPeeringConnectionPeerVpcOutputWithContext(ctx context.Context) GetVpcsVpcPeeringConnectionPeerVpcOutput {
-	return pulumi.ToOutputWithContext(ctx, i).(GetVpcsVpcPeeringConnectionPeerVpcOutput)
-}
-
-func (i GetVpcsVpcPeeringConnectionPeerVpcArgs) ToOutput(ctx context.Context) pulumix.Output[GetVpcsVpcPeeringConnectionPeerVpc] {
-	return pulumix.Output[GetVpcsVpcPeeringConnectionPeerVpc]{
-		OutputState: i.ToGetVpcsVpcPeeringConnectionPeerVpcOutputWithContext(ctx).OutputState,
-	}
-}
-
-// GetVpcsVpcPeeringConnectionPeerVpcArrayInput is an input type that accepts GetVpcsVpcPeeringConnectionPeerVpcArray and GetVpcsVpcPeeringConnectionPeerVpcArrayOutput values.
-// You can construct a concrete instance of `GetVpcsVpcPeeringConnectionPeerVpcArrayInput` via:
-//
-//	GetVpcsVpcPeeringConnectionPeerVpcArray{ GetVpcsVpcPeeringConnectionPeerVpcArgs{...} }
-type GetVpcsVpcPeeringConnectionPeerVpcArrayInput interface {
-	pulumi.Input
-
-	ToGetVpcsVpcPeeringConnectionPeerVpcArrayOutput() GetVpcsVpcPeeringConnectionPeerVpcArrayOutput
-	ToGetVpcsVpcPeeringConnectionPeerVpcArrayOutputWithContext(context.Context) GetVpcsVpcPeeringConnectionPeerVpcArrayOutput
-}
-
-type GetVpcsVpcPeeringConnectionPeerVpcArray []GetVpcsVpcPeeringConnectionPeerVpcInput
-
-func (GetVpcsVpcPeeringConnectionPeerVpcArray) ElementType() reflect.Type {
-	return reflect.TypeOf((*[]GetVpcsVpcPeeringConnectionPeerVpc)(nil)).Elem()
-}
-
-func (i GetVpcsVpcPeeringConnectionPeerVpcArray) ToGetVpcsVpcPeeringConnectionPeerVpcArrayOutput() GetVpcsVpcPeeringConnectionPeerVpcArrayOutput {
-	return i.ToGetVpcsVpcPeeringConnectionPeerVpcArrayOutputWithContext(context.Background())
-}
-
-func (i GetVpcsVpcPeeringConnectionPeerVpcArray) ToGetVpcsVpcPeeringConnectionPeerVpcArrayOutputWithContext(ctx context.Context) GetVpcsVpcPeeringConnectionPeerVpcArrayOutput {
-	return pulumi.ToOutputWithContext(ctx, i).(GetVpcsVpcPeeringConnectionPeerVpcArrayOutput)
-}
-
-func (i GetVpcsVpcPeeringConnectionPeerVpcArray) ToOutput(ctx context.Context) pulumix.Output[[]GetVpcsVpcPeeringConnectionPeerVpc] {
-	return pulumix.Output[[]GetVpcsVpcPeeringConnectionPeerVpc]{
-		OutputState: i.ToGetVpcsVpcPeeringConnectionPeerVpcArrayOutputWithContext(ctx).OutputState,
-	}
-}
-
-type GetVpcsVpcPeeringConnectionPeerVpcOutput struct{ *pulumi.OutputState }
-
-func (GetVpcsVpcPeeringConnectionPeerVpcOutput) ElementType() reflect.Type {
-	return reflect.TypeOf((*GetVpcsVpcPeeringConnectionPeerVpc)(nil)).Elem()
-}
-
-func (o GetVpcsVpcPeeringConnectionPeerVpcOutput) ToGetVpcsVpcPeeringConnectionPeerVpcOutput() GetVpcsVpcPeeringConnectionPeerVpcOutput {
-	return o
-}
-
-func (o GetVpcsVpcPeeringConnectionPeerVpcOutput) ToGetVpcsVpcPeeringConnectionPeerVpcOutputWithContext(ctx context.Context) GetVpcsVpcPeeringConnectionPeerVpcOutput {
-	return o
-}
-
-func (o GetVpcsVpcPeeringConnectionPeerVpcOutput) ToOutput(ctx context.Context) pulumix.Output[GetVpcsVpcPeeringConnectionPeerVpc] {
-	return pulumix.Output[GetVpcsVpcPeeringConnectionPeerVpc]{
-		OutputState: o.OutputState,
-	}
-}
-
-func (o GetVpcsVpcPeeringConnectionPeerVpcOutput) AccountId() pulumi.StringOutput {
-	return o.ApplyT(func(v GetVpcsVpcPeeringConnectionPeerVpc) string { return v.AccountId }).(pulumi.StringOutput)
-}
-
-func (o GetVpcsVpcPeeringConnectionPeerVpcOutput) Cidr() pulumi.StringOutput {
-	return o.ApplyT(func(v GetVpcsVpcPeeringConnectionPeerVpc) string { return v.Cidr }).(pulumi.StringOutput)
-}
-
-// The ID of this resource.
-func (o GetVpcsVpcPeeringConnectionPeerVpcOutput) Id() pulumi.IntOutput {
-	return o.ApplyT(func(v GetVpcsVpcPeeringConnectionPeerVpc) int { return v.Id }).(pulumi.IntOutput)
-}
-
-func (o GetVpcsVpcPeeringConnectionPeerVpcOutput) RegionCode() pulumi.StringOutput {
-	return o.ApplyT(func(v GetVpcsVpcPeeringConnectionPeerVpc) string { return v.RegionCode }).(pulumi.StringOutput)
-}
-
-type GetVpcsVpcPeeringConnectionPeerVpcArrayOutput struct{ *pulumi.OutputState }
-
-func (GetVpcsVpcPeeringConnectionPeerVpcArrayOutput) ElementType() reflect.Type {
-	return reflect.TypeOf((*[]GetVpcsVpcPeeringConnectionPeerVpc)(nil)).Elem()
-}
-
-func (o GetVpcsVpcPeeringConnectionPeerVpcArrayOutput) ToGetVpcsVpcPeeringConnectionPeerVpcArrayOutput() GetVpcsVpcPeeringConnectionPeerVpcArrayOutput {
-	return o
-}
-
-func (o GetVpcsVpcPeeringConnectionPeerVpcArrayOutput) ToGetVpcsVpcPeeringConnectionPeerVpcArrayOutputWithContext(ctx context.Context) GetVpcsVpcPeeringConnectionPeerVpcArrayOutput {
-	return o
-}
-
-func (o GetVpcsVpcPeeringConnectionPeerVpcArrayOutput) ToOutput(ctx context.Context) pulumix.Output[[]GetVpcsVpcPeeringConnectionPeerVpc] {
-	return pulumix.Output[[]GetVpcsVpcPeeringConnectionPeerVpc]{
-		OutputState: o.OutputState,
-	}
-}
-
-func (o GetVpcsVpcPeeringConnectionPeerVpcArrayOutput) Index(i pulumi.IntInput) GetVpcsVpcPeeringConnectionPeerVpcOutput {
-	return pulumi.All(o, i).ApplyT(func(vs []interface{}) GetVpcsVpcPeeringConnectionPeerVpc {
-		return vs[0].([]GetVpcsVpcPeeringConnectionPeerVpc)[vs[1].(int)]
-	}).(GetVpcsVpcPeeringConnectionPeerVpcOutput)
-}
-
 func init() {
 	pulumi.RegisterInputType(reflect.TypeOf((*ServiceTimeoutsInput)(nil)).Elem(), ServiceTimeoutsArgs{})
 	pulumi.RegisterInputType(reflect.TypeOf((*ServiceTimeoutsPtrInput)(nil)).Elem(), ServiceTimeoutsArgs{})
+	pulumi.RegisterInputType(reflect.TypeOf((*VpcsTimeoutsInput)(nil)).Elem(), VpcsTimeoutsArgs{})
+	pulumi.RegisterInputType(reflect.TypeOf((*VpcsTimeoutsPtrInput)(nil)).Elem(), VpcsTimeoutsArgs{})
 	pulumi.RegisterInputType(reflect.TypeOf((*GetProductsProductInput)(nil)).Elem(), GetProductsProductArgs{})
 	pulumi.RegisterInputType(reflect.TypeOf((*GetProductsProductArrayInput)(nil)).Elem(), GetProductsProductArray{})
 	pulumi.RegisterInputType(reflect.TypeOf((*GetProductsProductPlanInput)(nil)).Elem(), GetProductsProductPlanArgs{})
@@ -1227,10 +1284,10 @@ func init() {
 	pulumi.RegisterInputType(reflect.TypeOf((*GetVpcsVpcArrayInput)(nil)).Elem(), GetVpcsVpcArray{})
 	pulumi.RegisterInputType(reflect.TypeOf((*GetVpcsVpcPeeringConnectionInput)(nil)).Elem(), GetVpcsVpcPeeringConnectionArgs{})
 	pulumi.RegisterInputType(reflect.TypeOf((*GetVpcsVpcPeeringConnectionArrayInput)(nil)).Elem(), GetVpcsVpcPeeringConnectionArray{})
-	pulumi.RegisterInputType(reflect.TypeOf((*GetVpcsVpcPeeringConnectionPeerVpcInput)(nil)).Elem(), GetVpcsVpcPeeringConnectionPeerVpcArgs{})
-	pulumi.RegisterInputType(reflect.TypeOf((*GetVpcsVpcPeeringConnectionPeerVpcArrayInput)(nil)).Elem(), GetVpcsVpcPeeringConnectionPeerVpcArray{})
 	pulumi.RegisterOutputType(ServiceTimeoutsOutput{})
 	pulumi.RegisterOutputType(ServiceTimeoutsPtrOutput{})
+	pulumi.RegisterOutputType(VpcsTimeoutsOutput{})
+	pulumi.RegisterOutputType(VpcsTimeoutsPtrOutput{})
 	pulumi.RegisterOutputType(GetProductsProductOutput{})
 	pulumi.RegisterOutputType(GetProductsProductArrayOutput{})
 	pulumi.RegisterOutputType(GetProductsProductPlanOutput{})
@@ -1243,6 +1300,4 @@ func init() {
 	pulumi.RegisterOutputType(GetVpcsVpcArrayOutput{})
 	pulumi.RegisterOutputType(GetVpcsVpcPeeringConnectionOutput{})
 	pulumi.RegisterOutputType(GetVpcsVpcPeeringConnectionArrayOutput{})
-	pulumi.RegisterOutputType(GetVpcsVpcPeeringConnectionPeerVpcOutput{})
-	pulumi.RegisterOutputType(GetVpcsVpcPeeringConnectionPeerVpcArrayOutput{})
 }

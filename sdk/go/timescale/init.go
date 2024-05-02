@@ -21,8 +21,12 @@ func (m *module) Version() semver.Version {
 
 func (m *module) Construct(ctx *pulumi.Context, name, typ, urn string) (r pulumi.Resource, err error) {
 	switch typ {
+	case "timescale:index/peeringConnection:PeeringConnection":
+		r = &PeeringConnection{}
 	case "timescale:index/service:Service":
 		r = &Service{}
+	case "timescale:index/vpcs:Vpcs":
+		r = &Vpcs{}
 	default:
 		return nil, fmt.Errorf("unknown resource type: %s", typ)
 	}
@@ -56,7 +60,17 @@ func init() {
 	}
 	pulumi.RegisterResourceModule(
 		"timescale",
+		"index/peeringConnection",
+		&module{version},
+	)
+	pulumi.RegisterResourceModule(
+		"timescale",
 		"index/service",
+		&module{version},
+	)
+	pulumi.RegisterResourceModule(
+		"timescale",
+		"index/vpcs",
 		&module{version},
 	)
 	pulumi.RegisterResourcePackage(

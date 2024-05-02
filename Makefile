@@ -1,6 +1,5 @@
 PROJECT_NAME := timescale Package
 
-SHELL            := /bin/bash
 PACK             := timescale
 ORG              := digizuite
 PROJECT          := github.com/${ORG}/pulumi-${PACK}
@@ -71,7 +70,7 @@ build_python:: install_plugins tfgen # build the python sdk
 	$(WORKING_DIR)/bin/$(TFGEN) python --overlays provider/overlays/python --out sdk/python/
 	cd sdk/python/ && \
         cp ../../README.md . && \
-        python3 setup.py clean --all 2>/dev/null && \
+        python3 setup.py clean --all && \
         rm -rf ./bin/ ../python.bin/ && cp -R . ../python.bin && mv ../python.bin ./bin && \
         sed -i.bak -e 's/^VERSION = .*/VERSION = "$(PYPI_VERSION)"/g' -e 's/^PLUGIN_VERSION = .*/PLUGIN_VERSION = "$(VERSION)"/g' ./bin/setup.py && \
         rm ./bin/setup.py.bak && \

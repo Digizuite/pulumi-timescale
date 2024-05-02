@@ -47,6 +47,14 @@ export interface GetServiceSpec {
      */
     hostname: string;
     /**
+     * Hostname of the pooler of this service.
+     */
+    poolerHostname: string;
+    /**
+     * Port of the pooler of this service.
+     */
+    poolerPort: number;
+    /**
      * Port is the port assigned to this service.
      */
     port: number;
@@ -75,26 +83,23 @@ export interface GetVpcsVpc {
 
 export interface GetVpcsVpcPeeringConnection {
     errorMessage: string;
-    /**
-     * The ID of this resource.
-     */
-    id: number;
-    peerVpcs: outputs.GetVpcsVpcPeeringConnectionPeerVpc[];
+    peerAccountId: string;
+    peerCidr: string;
+    peerRegionCode: string;
+    peerVpcId: string;
+    provisionedId: string;
     status: string;
-    vpcId: number;
-}
-
-export interface GetVpcsVpcPeeringConnectionPeerVpc {
-    accountId: string;
-    cidr: string;
-    /**
-     * The ID of this resource.
-     */
-    id: number;
-    regionCode: string;
+    vpcId: string;
 }
 
 export interface ServiceTimeouts {
+    /**
+     * A string that can be [parsed as a duration](https://pkg.go.dev/time#ParseDuration) consisting of numbers and unit suffixes, such as "30s" or "2h45m". Valid time units are "s" (seconds), "m" (minutes), "h" (hours).
+     */
+    create?: string;
+}
+
+export interface VpcsTimeouts {
     /**
      * A string that can be [parsed as a duration](https://pkg.go.dev/time#ParseDuration) consisting of numbers and unit suffixes, such as "30s" or "2h45m". Valid time units are "s" (seconds), "m" (minutes), "h" (hours).
      */

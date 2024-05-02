@@ -18,6 +18,14 @@ namespace Pulumi.Timescale.Outputs
         /// </summary>
         public readonly string Hostname;
         /// <summary>
+        /// Hostname of the pooler of this service.
+        /// </summary>
+        public readonly string PoolerHostname;
+        /// <summary>
+        /// Port of the pooler of this service.
+        /// </summary>
+        public readonly int PoolerPort;
+        /// <summary>
         /// Port is the port assigned to this service.
         /// </summary>
         public readonly int Port;
@@ -30,11 +38,17 @@ namespace Pulumi.Timescale.Outputs
         private GetServiceSpecResult(
             string hostname,
 
+            string poolerHostname,
+
+            int poolerPort,
+
             int port,
 
             string username)
         {
             Hostname = hostname;
+            PoolerHostname = poolerHostname;
+            PoolerPort = poolerPort;
             Port = port;
             Username = username;
         }

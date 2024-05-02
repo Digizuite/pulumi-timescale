@@ -13,6 +13,7 @@ export function getService(args: GetServiceArgs, opts?: pulumi.InvokeOptions): P
 
     opts = pulumi.mergeOptions(utilities.resourceOptsDefaults(), opts || {});
     return pulumi.runtime.invoke("timescale:index/getService:getService", {
+        "environmentTag": args.environmentTag,
         "id": args.id,
         "vpcId": args.vpcId,
     }, opts);
@@ -22,6 +23,10 @@ export function getService(args: GetServiceArgs, opts?: pulumi.InvokeOptions): P
  * A collection of arguments for invoking getService.
  */
 export interface GetServiceArgs {
+    /**
+     * Environment tag for this service.
+     */
+    environmentTag?: string;
     /**
      * Service ID is the unique identifier for this service
      */
@@ -40,6 +45,10 @@ export interface GetServiceResult {
      * Created is the time this service was created.
      */
     readonly created: string;
+    /**
+     * Environment tag for this service.
+     */
+    readonly environmentTag: string;
     /**
      * Service ID is the unique identifier for this service
      */
@@ -70,6 +79,10 @@ export function getServiceOutput(args: GetServiceOutputArgs, opts?: pulumi.Invok
  * A collection of arguments for invoking getService.
  */
 export interface GetServiceOutputArgs {
+    /**
+     * Environment tag for this service.
+     */
+    environmentTag?: pulumi.Input<string>;
     /**
      * Service ID is the unique identifier for this service
      */

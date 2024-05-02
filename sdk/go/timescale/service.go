@@ -12,11 +12,44 @@ import (
 	"github.com/pulumi/pulumi/sdk/v3/go/pulumix"
 )
 
+// ## Example Usage
+//
+// ```go
+// package main
+//
+// import (
+//
+//	"github.com/digizuite/pulumi-timescale/sdk/go/timescale"
+//	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
+//
+// )
+//
+//	func main() {
+//		pulumi.Run(func(ctx *pulumi.Context) error {
+//			test, err := timescale.NewService(ctx, "test", nil)
+//			if err != nil {
+//				return err
+//			}
+//			_, err = timescale.NewService(ctx, "readReplica", &timescale.ServiceArgs{
+//				ReadReplicaSource: test.ID(),
+//			})
+//			if err != nil {
+//				return err
+//			}
+//			return nil
+//		})
+//	}
+//
+// ```
 type Service struct {
 	pulumi.CustomResourceState
 
+	// Set connection pooler status for this service.
+	ConnectionPoolerEnabled pulumi.BoolOutput `pulumi:"connectionPoolerEnabled"`
 	// Enable HA Replica
 	EnableHaReplica pulumi.BoolOutput `pulumi:"enableHaReplica"`
+	// Set environment tag for this service.
+	EnvironmentTag pulumi.StringOutput `pulumi:"environmentTag"`
 	// The hostname for this service
 	Hostname pulumi.StringOutput `pulumi:"hostname"`
 	// Memory GB
@@ -27,9 +60,17 @@ type Service struct {
 	Name pulumi.StringOutput `pulumi:"name"`
 	// The Postgres password for this service. The password is provided once during service creation
 	Password pulumi.StringOutput `pulumi:"password"`
+	// Paused status of the service.
+	Paused pulumi.BoolOutput `pulumi:"paused"`
+	// Hostname of the pooler of this service.
+	PoolerHostname pulumi.StringOutput `pulumi:"poolerHostname"`
+	// Port of the pooler of this service.
+	PoolerPort pulumi.IntOutput `pulumi:"poolerPort"`
 	// The port for this service
 	Port pulumi.IntOutput `pulumi:"port"`
-	// The region for this service. Currently supported regions are us-east-1, eu-west-1, us-west-2, eu-central-1, ap-southeast-2
+	// If set, this database will be a read replica of the provided source database. The region must be the same as the source, or if omitted will be handled by the provider
+	ReadReplicaSource pulumi.StringPtrOutput `pulumi:"readReplicaSource"`
+	// The region for this service.
 	RegionCode pulumi.StringOutput `pulumi:"regionCode"`
 	// Deprecated: Storage GB
 	//
@@ -76,8 +117,12 @@ func GetService(ctx *pulumi.Context,
 
 // Input properties used for looking up and filtering Service resources.
 type serviceState struct {
+	// Set connection pooler status for this service.
+	ConnectionPoolerEnabled *bool `pulumi:"connectionPoolerEnabled"`
 	// Enable HA Replica
 	EnableHaReplica *bool `pulumi:"enableHaReplica"`
+	// Set environment tag for this service.
+	EnvironmentTag *string `pulumi:"environmentTag"`
 	// The hostname for this service
 	Hostname *string `pulumi:"hostname"`
 	// Memory GB
@@ -88,9 +133,17 @@ type serviceState struct {
 	Name *string `pulumi:"name"`
 	// The Postgres password for this service. The password is provided once during service creation
 	Password *string `pulumi:"password"`
+	// Paused status of the service.
+	Paused *bool `pulumi:"paused"`
+	// Hostname of the pooler of this service.
+	PoolerHostname *string `pulumi:"poolerHostname"`
+	// Port of the pooler of this service.
+	PoolerPort *int `pulumi:"poolerPort"`
 	// The port for this service
 	Port *int `pulumi:"port"`
-	// The region for this service. Currently supported regions are us-east-1, eu-west-1, us-west-2, eu-central-1, ap-southeast-2
+	// If set, this database will be a read replica of the provided source database. The region must be the same as the source, or if omitted will be handled by the provider
+	ReadReplicaSource *string `pulumi:"readReplicaSource"`
+	// The region for this service.
 	RegionCode *string `pulumi:"regionCode"`
 	// Deprecated: Storage GB
 	//
@@ -104,8 +157,12 @@ type serviceState struct {
 }
 
 type ServiceState struct {
+	// Set connection pooler status for this service.
+	ConnectionPoolerEnabled pulumi.BoolPtrInput
 	// Enable HA Replica
 	EnableHaReplica pulumi.BoolPtrInput
+	// Set environment tag for this service.
+	EnvironmentTag pulumi.StringPtrInput
 	// The hostname for this service
 	Hostname pulumi.StringPtrInput
 	// Memory GB
@@ -116,9 +173,17 @@ type ServiceState struct {
 	Name pulumi.StringPtrInput
 	// The Postgres password for this service. The password is provided once during service creation
 	Password pulumi.StringPtrInput
+	// Paused status of the service.
+	Paused pulumi.BoolPtrInput
+	// Hostname of the pooler of this service.
+	PoolerHostname pulumi.StringPtrInput
+	// Port of the pooler of this service.
+	PoolerPort pulumi.IntPtrInput
 	// The port for this service
 	Port pulumi.IntPtrInput
-	// The region for this service. Currently supported regions are us-east-1, eu-west-1, us-west-2, eu-central-1, ap-southeast-2
+	// If set, this database will be a read replica of the provided source database. The region must be the same as the source, or if omitted will be handled by the provider
+	ReadReplicaSource pulumi.StringPtrInput
+	// The region for this service.
 	RegionCode pulumi.StringPtrInput
 	// Deprecated: Storage GB
 	//
@@ -136,15 +201,23 @@ func (ServiceState) ElementType() reflect.Type {
 }
 
 type serviceArgs struct {
+	// Set connection pooler status for this service.
+	ConnectionPoolerEnabled *bool `pulumi:"connectionPoolerEnabled"`
 	// Enable HA Replica
 	EnableHaReplica *bool `pulumi:"enableHaReplica"`
+	// Set environment tag for this service.
+	EnvironmentTag *string `pulumi:"environmentTag"`
 	// Memory GB
 	MemoryGb *int `pulumi:"memoryGb"`
 	// Milli CPU
 	MilliCpu *int `pulumi:"milliCpu"`
 	// Service Name is the configurable name assigned to this resource. If none is provided, a default will be generated by the provider.
 	Name *string `pulumi:"name"`
-	// The region for this service. Currently supported regions are us-east-1, eu-west-1, us-west-2, eu-central-1, ap-southeast-2
+	// Paused status of the service.
+	Paused *bool `pulumi:"paused"`
+	// If set, this database will be a read replica of the provided source database. The region must be the same as the source, or if omitted will be handled by the provider
+	ReadReplicaSource *string `pulumi:"readReplicaSource"`
+	// The region for this service.
 	RegionCode *string `pulumi:"regionCode"`
 	// Deprecated: Storage GB
 	//
@@ -157,15 +230,23 @@ type serviceArgs struct {
 
 // The set of arguments for constructing a Service resource.
 type ServiceArgs struct {
+	// Set connection pooler status for this service.
+	ConnectionPoolerEnabled pulumi.BoolPtrInput
 	// Enable HA Replica
 	EnableHaReplica pulumi.BoolPtrInput
+	// Set environment tag for this service.
+	EnvironmentTag pulumi.StringPtrInput
 	// Memory GB
 	MemoryGb pulumi.IntPtrInput
 	// Milli CPU
 	MilliCpu pulumi.IntPtrInput
 	// Service Name is the configurable name assigned to this resource. If none is provided, a default will be generated by the provider.
 	Name pulumi.StringPtrInput
-	// The region for this service. Currently supported regions are us-east-1, eu-west-1, us-west-2, eu-central-1, ap-southeast-2
+	// Paused status of the service.
+	Paused pulumi.BoolPtrInput
+	// If set, this database will be a read replica of the provided source database. The region must be the same as the source, or if omitted will be handled by the provider
+	ReadReplicaSource pulumi.StringPtrInput
+	// The region for this service.
 	RegionCode pulumi.StringPtrInput
 	// Deprecated: Storage GB
 	//
@@ -287,9 +368,19 @@ func (o ServiceOutput) ToOutput(ctx context.Context) pulumix.Output[*Service] {
 	}
 }
 
+// Set connection pooler status for this service.
+func (o ServiceOutput) ConnectionPoolerEnabled() pulumi.BoolOutput {
+	return o.ApplyT(func(v *Service) pulumi.BoolOutput { return v.ConnectionPoolerEnabled }).(pulumi.BoolOutput)
+}
+
 // Enable HA Replica
 func (o ServiceOutput) EnableHaReplica() pulumi.BoolOutput {
 	return o.ApplyT(func(v *Service) pulumi.BoolOutput { return v.EnableHaReplica }).(pulumi.BoolOutput)
+}
+
+// Set environment tag for this service.
+func (o ServiceOutput) EnvironmentTag() pulumi.StringOutput {
+	return o.ApplyT(func(v *Service) pulumi.StringOutput { return v.EnvironmentTag }).(pulumi.StringOutput)
 }
 
 // The hostname for this service
@@ -317,12 +408,32 @@ func (o ServiceOutput) Password() pulumi.StringOutput {
 	return o.ApplyT(func(v *Service) pulumi.StringOutput { return v.Password }).(pulumi.StringOutput)
 }
 
+// Paused status of the service.
+func (o ServiceOutput) Paused() pulumi.BoolOutput {
+	return o.ApplyT(func(v *Service) pulumi.BoolOutput { return v.Paused }).(pulumi.BoolOutput)
+}
+
+// Hostname of the pooler of this service.
+func (o ServiceOutput) PoolerHostname() pulumi.StringOutput {
+	return o.ApplyT(func(v *Service) pulumi.StringOutput { return v.PoolerHostname }).(pulumi.StringOutput)
+}
+
+// Port of the pooler of this service.
+func (o ServiceOutput) PoolerPort() pulumi.IntOutput {
+	return o.ApplyT(func(v *Service) pulumi.IntOutput { return v.PoolerPort }).(pulumi.IntOutput)
+}
+
 // The port for this service
 func (o ServiceOutput) Port() pulumi.IntOutput {
 	return o.ApplyT(func(v *Service) pulumi.IntOutput { return v.Port }).(pulumi.IntOutput)
 }
 
-// The region for this service. Currently supported regions are us-east-1, eu-west-1, us-west-2, eu-central-1, ap-southeast-2
+// If set, this database will be a read replica of the provided source database. The region must be the same as the source, or if omitted will be handled by the provider
+func (o ServiceOutput) ReadReplicaSource() pulumi.StringPtrOutput {
+	return o.ApplyT(func(v *Service) pulumi.StringPtrOutput { return v.ReadReplicaSource }).(pulumi.StringPtrOutput)
+}
+
+// The region for this service.
 func (o ServiceOutput) RegionCode() pulumi.StringOutput {
 	return o.ApplyT(func(v *Service) pulumi.StringOutput { return v.RegionCode }).(pulumi.StringOutput)
 }

@@ -12,6 +12,7 @@ from . import outputs
 
 __all__ = [
     'ServiceTimeouts',
+    'VpcsTimeouts',
     'GetProductsProductResult',
     'GetProductsProductPlanResult',
     'GetServiceResourceResult',
@@ -19,11 +20,29 @@ __all__ = [
     'GetServiceSpecResult',
     'GetVpcsVpcResult',
     'GetVpcsVpcPeeringConnectionResult',
-    'GetVpcsVpcPeeringConnectionPeerVpcResult',
 ]
 
 @pulumi.output_type
 class ServiceTimeouts(dict):
+    def __init__(__self__, *,
+                 create: Optional[str] = None):
+        """
+        :param str create: A string that can be [parsed as a duration](https://pkg.go.dev/time#ParseDuration) consisting of numbers and unit suffixes, such as "30s" or "2h45m". Valid time units are "s" (seconds), "m" (minutes), "h" (hours).
+        """
+        if create is not None:
+            pulumi.set(__self__, "create", create)
+
+    @property
+    @pulumi.getter
+    def create(self) -> Optional[str]:
+        """
+        A string that can be [parsed as a duration](https://pkg.go.dev/time#ParseDuration) consisting of numbers and unit suffixes, such as "30s" or "2h45m". Valid time units are "s" (seconds), "m" (minutes), "h" (hours).
+        """
+        return pulumi.get(self, "create")
+
+
+@pulumi.output_type
+class VpcsTimeouts(dict):
     def __init__(__self__, *,
                  create: Optional[str] = None):
         """
@@ -188,14 +207,20 @@ class GetServiceResourceSpecResult(dict):
 class GetServiceSpecResult(dict):
     def __init__(__self__, *,
                  hostname: str,
+                 pooler_hostname: str,
+                 pooler_port: int,
                  port: int,
                  username: str):
         """
         :param str hostname: Hostname is the hostname of this service.
+        :param str pooler_hostname: Hostname of the pooler of this service.
+        :param int pooler_port: Port of the pooler of this service.
         :param int port: Port is the port assigned to this service.
         :param str username: Username is the Postgres username.
         """
         pulumi.set(__self__, "hostname", hostname)
+        pulumi.set(__self__, "pooler_hostname", pooler_hostname)
+        pulumi.set(__self__, "pooler_port", pooler_port)
         pulumi.set(__self__, "port", port)
         pulumi.set(__self__, "username", username)
 
@@ -206,6 +231,22 @@ class GetServiceSpecResult(dict):
         Hostname is the hostname of this service.
         """
         return pulumi.get(self, "hostname")
+
+    @property
+    @pulumi.getter(name="poolerHostname")
+    def pooler_hostname(self) -> str:
+        """
+        Hostname of the pooler of this service.
+        """
+        return pulumi.get(self, "pooler_hostname")
+
+    @property
+    @pulumi.getter(name="poolerPort")
+    def pooler_port(self) -> int:
+        """
+        Port of the pooler of this service.
+        """
+        return pulumi.get(self, "pooler_port")
 
     @property
     @pulumi.getter
@@ -316,16 +357,19 @@ class GetVpcsVpcResult(dict):
 class GetVpcsVpcPeeringConnectionResult(dict):
     def __init__(__self__, *,
                  error_message: str,
-                 id: int,
-                 peer_vpcs: Sequence['outputs.GetVpcsVpcPeeringConnectionPeerVpcResult'],
+                 peer_account_id: str,
+                 peer_cidr: str,
+                 peer_region_code: str,
+                 peer_vpc_id: str,
+                 provisioned_id: str,
                  status: str,
-                 vpc_id: int):
-        """
-        :param int id: The ID of this resource.
-        """
+                 vpc_id: str):
         pulumi.set(__self__, "error_message", error_message)
-        pulumi.set(__self__, "id", id)
-        pulumi.set(__self__, "peer_vpcs", peer_vpcs)
+        pulumi.set(__self__, "peer_account_id", peer_account_id)
+        pulumi.set(__self__, "peer_cidr", peer_cidr)
+        pulumi.set(__self__, "peer_region_code", peer_region_code)
+        pulumi.set(__self__, "peer_vpc_id", peer_vpc_id)
+        pulumi.set(__self__, "provisioned_id", provisioned_id)
         pulumi.set(__self__, "status", status)
         pulumi.set(__self__, "vpc_id", vpc_id)
 
@@ -335,17 +379,29 @@ class GetVpcsVpcPeeringConnectionResult(dict):
         return pulumi.get(self, "error_message")
 
     @property
-    @pulumi.getter
-    def id(self) -> int:
-        """
-        The ID of this resource.
-        """
-        return pulumi.get(self, "id")
+    @pulumi.getter(name="peerAccountId")
+    def peer_account_id(self) -> str:
+        return pulumi.get(self, "peer_account_id")
 
     @property
-    @pulumi.getter(name="peerVpcs")
-    def peer_vpcs(self) -> Sequence['outputs.GetVpcsVpcPeeringConnectionPeerVpcResult']:
-        return pulumi.get(self, "peer_vpcs")
+    @pulumi.getter(name="peerCidr")
+    def peer_cidr(self) -> str:
+        return pulumi.get(self, "peer_cidr")
+
+    @property
+    @pulumi.getter(name="peerRegionCode")
+    def peer_region_code(self) -> str:
+        return pulumi.get(self, "peer_region_code")
+
+    @property
+    @pulumi.getter(name="peerVpcId")
+    def peer_vpc_id(self) -> str:
+        return pulumi.get(self, "peer_vpc_id")
+
+    @property
+    @pulumi.getter(name="provisionedId")
+    def provisioned_id(self) -> str:
+        return pulumi.get(self, "provisioned_id")
 
     @property
     @pulumi.getter
@@ -354,46 +410,7 @@ class GetVpcsVpcPeeringConnectionResult(dict):
 
     @property
     @pulumi.getter(name="vpcId")
-    def vpc_id(self) -> int:
+    def vpc_id(self) -> str:
         return pulumi.get(self, "vpc_id")
-
-
-@pulumi.output_type
-class GetVpcsVpcPeeringConnectionPeerVpcResult(dict):
-    def __init__(__self__, *,
-                 account_id: str,
-                 cidr: str,
-                 id: int,
-                 region_code: str):
-        """
-        :param int id: The ID of this resource.
-        """
-        pulumi.set(__self__, "account_id", account_id)
-        pulumi.set(__self__, "cidr", cidr)
-        pulumi.set(__self__, "id", id)
-        pulumi.set(__self__, "region_code", region_code)
-
-    @property
-    @pulumi.getter(name="accountId")
-    def account_id(self) -> str:
-        return pulumi.get(self, "account_id")
-
-    @property
-    @pulumi.getter
-    def cidr(self) -> str:
-        return pulumi.get(self, "cidr")
-
-    @property
-    @pulumi.getter
-    def id(self) -> int:
-        """
-        The ID of this resource.
-        """
-        return pulumi.get(self, "id")
-
-    @property
-    @pulumi.getter(name="regionCode")
-    def region_code(self) -> str:
-        return pulumi.get(self, "region_code")
 
 

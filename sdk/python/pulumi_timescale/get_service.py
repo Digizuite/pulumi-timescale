@@ -22,10 +22,13 @@ class GetServiceResult:
     """
     A collection of values returned by getService.
     """
-    def __init__(__self__, created=None, id=None, name=None, region_code=None, resources=None, spec=None, vpc_id=None):
+    def __init__(__self__, created=None, environment_tag=None, id=None, name=None, region_code=None, resources=None, spec=None, vpc_id=None):
         if created and not isinstance(created, str):
             raise TypeError("Expected argument 'created' to be a str")
         pulumi.set(__self__, "created", created)
+        if environment_tag and not isinstance(environment_tag, str):
+            raise TypeError("Expected argument 'environment_tag' to be a str")
+        pulumi.set(__self__, "environment_tag", environment_tag)
         if id and not isinstance(id, str):
             raise TypeError("Expected argument 'id' to be a str")
         pulumi.set(__self__, "id", id)
@@ -52,6 +55,14 @@ class GetServiceResult:
         Created is the time this service was created.
         """
         return pulumi.get(self, "created")
+
+    @property
+    @pulumi.getter(name="environmentTag")
+    def environment_tag(self) -> str:
+        """
+        Environment tag for this service.
+        """
+        return pulumi.get(self, "environment_tag")
 
     @property
     @pulumi.getter
@@ -103,6 +114,7 @@ class AwaitableGetServiceResult(GetServiceResult):
             yield self
         return GetServiceResult(
             created=self.created,
+            environment_tag=self.environment_tag,
             id=self.id,
             name=self.name,
             region_code=self.region_code,
@@ -111,17 +123,20 @@ class AwaitableGetServiceResult(GetServiceResult):
             vpc_id=self.vpc_id)
 
 
-def get_service(id: Optional[str] = None,
+def get_service(environment_tag: Optional[str] = None,
+                id: Optional[str] = None,
                 vpc_id: Optional[int] = None,
                 opts: Optional[pulumi.InvokeOptions] = None) -> AwaitableGetServiceResult:
     """
     Service data source
 
 
+    :param str environment_tag: Environment tag for this service.
     :param str id: Service ID is the unique identifier for this service
     :param int vpc_id: VPC ID this service is linked to.
     """
     __args__ = dict()
+    __args__['environmentTag'] = environment_tag
     __args__['id'] = id
     __args__['vpcId'] = vpc_id
     opts = pulumi.InvokeOptions.merge(_utilities.get_invoke_opts_defaults(), opts)
@@ -129,6 +144,7 @@ def get_service(id: Optional[str] = None,
 
     return AwaitableGetServiceResult(
         created=pulumi.get(__ret__, 'created'),
+        environment_tag=pulumi.get(__ret__, 'environment_tag'),
         id=pulumi.get(__ret__, 'id'),
         name=pulumi.get(__ret__, 'name'),
         region_code=pulumi.get(__ret__, 'region_code'),
@@ -138,13 +154,15 @@ def get_service(id: Optional[str] = None,
 
 
 @_utilities.lift_output_func(get_service)
-def get_service_output(id: Optional[pulumi.Input[str]] = None,
+def get_service_output(environment_tag: Optional[pulumi.Input[Optional[str]]] = None,
+                       id: Optional[pulumi.Input[str]] = None,
                        vpc_id: Optional[pulumi.Input[Optional[int]]] = None,
                        opts: Optional[pulumi.InvokeOptions] = None) -> pulumi.Output[GetServiceResult]:
     """
     Service data source
 
 
+    :param str environment_tag: Environment tag for this service.
     :param str id: Service ID is the unique identifier for this service
     :param int vpc_id: VPC ID this service is linked to.
     """
